@@ -1,15 +1,21 @@
 using JSON
 using YAML
+using Pkg.TOML
 
 export load, save
 
 function save(filepath, data)
-    ext = extension(filepath)
+    ext, fp = extension(filepath), abspath(expanduser(filepath))
     if ext ∈ ("yaml", "yml")
-        YAML.write_file(expanduser(filepath), data)
+        YAML.write_file(fp, data)
     elseif ext == "json"
-        open(expanduser(filepath), "w") do io
+        open(fp, "w") do io
             JSON.print(io, data)
+        end
+    elseif ext == "toml"
+        typeassert(data, AbstractDict)
+        open(fp, "w") do io
+            TOML.print(io, data)
         end
     else
         error("unknown file extension `$ext`!")
@@ -17,13 +23,15 @@ function save(filepath, data)
 end # function save
 
 function load(filepath)
-    ext = extension(filepath)
+    ext, fp = extension(filepath), abspath(expanduser(filepath))
     if ext ∈ ("yaml", "yml")
-        return open(expanduser(filepath), "r") do io
+        return open(fp, "r") do io
             YAML.load(io)
         end
     elseif ext == "json"
-        return JSON.parsefile(expanduser(filepath))
+        return JSON.parsefile(fp)
+    elseif ext == "toml"
+        return TOML.parsefile(fp)
     else
         error("unknown file extension `$ext`!")
     end
