@@ -5,11 +5,12 @@ version = "0.1.0"
 
 [deps]
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [compat]
-YAML = "0.4"
 JSON = "0.20, 0.21"
+YAML = "0.4"
 julia = "1"
 
 [extras]
