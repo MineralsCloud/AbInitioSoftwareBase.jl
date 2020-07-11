@@ -4,14 +4,14 @@ export MpiCmd
 
 struct MpiCmd
     n::UInt
-    bin
-    host
-    arch
-    wdir
-    path
-    file
-    configfile
-    env
+    bin::Any
+    host::Any
+    arch::Any
+    wdir::Any
+    path::Any
+    file::Any
+    configfile::Any
+    env::Any
 end
 MpiCmd(
     n;
