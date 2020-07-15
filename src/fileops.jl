@@ -1,8 +1,11 @@
 using JSON
 using YAML
 using Pkg.TOML
+using FilePathsBase: AbstractPath
 
-export load, save
+export FilePath, load, save
+
+const FilePath = AbstractPath
 
 function save(filepath, data)
     ext, fp = extension(filepath), abspath(expanduser(filepath))
