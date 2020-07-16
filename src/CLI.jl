@@ -11,7 +11,6 @@ struct MpiCmd
     path
     file
     configfile
-    env
 end
 MpiCmd(
     n;
@@ -22,8 +21,7 @@ MpiCmd(
     path = String[],
     file = "",
     configfile = "",
-    env = ENV,
-) = MpiCmd(n, bin, host, arch, wdir, path, file, configfile, env)
+) = MpiCmd(n, bin, host, arch, wdir, path, file, configfile)
 # The docs are from https://www.mpich.org/static/docs/v3.3/www1/mpiexec.html.
 
 end
