@@ -1,19 +1,17 @@
 module CLI
 
-export MpiCmd
+export MpiExec
 
 """
-    MpiCmd(n; bin = "mpiexec", host = "", arch = "", wdir = "", path = String[], file = "", configfile = "")
+    MpiCmd(n; host = "", arch = "", wdir = "", path = String[], file = "", configfile = "")
 
 Represent the `mpiexec` command. Must be combined with an actual command.
 
 Type `?MpiCmd.host` to see the documentation of the `host` parameter, and so on.
 """
-struct MpiCmd
+struct MpiExec
     "Specify the number of processes to use."
     n::UInt
-    "The path to the executable of `mpiexec`."
-    bin
     "Name of host on which to run processes."
     host
     "Pick hosts with this architecture type."
@@ -27,16 +25,15 @@ struct MpiCmd
     "A file containing specifications of host/program, one per line, with number as a comment indicator, e.g., the usual mpiexec input, but with \":\" replaced with a newline. That is, the `configfile` contains lines with `-soft`, `-n`, etc."
     configfile
 end
-MpiCmd(
+MpiExec(
     n;
-    bin = "mpiexec",
     host = "",
     arch = "",
     wdir = "",
     path = String[],
     file = "",
     configfile = "",
-) = MpiCmd(n, bin, host, arch, wdir, path, file, configfile)
+) = MpiExec(n, host, arch, wdir, path, file, configfile)
 # The docs are from https://www.mpich.org/static/docs/v3.3/www1/mpiexec.html.
 
 end
