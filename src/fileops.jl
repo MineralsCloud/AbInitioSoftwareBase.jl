@@ -16,7 +16,7 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
 
 !!! warning
     Allowed `data` types can be referenced in [`JSON.jl` documentation](https://github.com/JuliaIO/JSON.jl/blob/master/README.md)
-    and [`YAML.jl` documentation.](https://github.com/JuliaData/YAML.jl/blob/master/README.md)
+    and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
     For `TOML` format, only `AbstractDict` type is allowed.
 """
 function save(filepath, data)
@@ -38,9 +38,9 @@ function save(filepath, data)
 end # function save
 
 """
-    save(filepath, data)
+    load(filepath)
 
-load `data` from `filepath` to a `Dict`.
+load data from `filepath` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `filepath` extension.
 """
