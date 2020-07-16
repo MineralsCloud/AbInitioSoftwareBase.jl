@@ -11,7 +11,15 @@ makedocs(;
         canonical = "https://MineralsCloud.github.io/AbInitioSoftwareBase.jl",
         assets = String[],
     ),
-    pages = ["Home" => "index.md"],
+    pages = [
+        "Home" => "index.md",
+        "Manual" => ["Installation" => "install.md", "Development" => "develop.md"],
+        "API by module" => [
+            "`AbInitioSoftwareBase` module" => "api/api.md",
+            "`Inputs` module" => "api/Inputs.md",
+            "`CLI` module" => "api/CLI.md",
+        ],
+    ],
 )
 
 deploydocs(; repo = "github.com/MineralsCloud/AbInitioSoftwareBase.jl")
