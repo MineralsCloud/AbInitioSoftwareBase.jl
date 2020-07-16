@@ -2,12 +2,18 @@ module Inputs
 
 export Input, inputstring, titleof, write_input
 
+"An abstract type representing an input object of ab initio software."
 abstract type Input end
 
 function inputstring end
 
 function titleof end
 
+"""
+    write_input(file, object::Input, dry_run = false)
+
+Write `object` to `file`. Use `dry_run = true` to print without actual writing.
+"""
 function write_input(file, object::Input, dry_run = false)
     if dry_run
         if isfile(file)
