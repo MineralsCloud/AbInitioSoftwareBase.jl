@@ -9,3 +9,5 @@
 [![Build Status](https://api.cirrus-ci.com/github/MineralsCloud/AbInitioSoftwareBase.jl.svg)](https://cirrus-ci.com/github/MineralsCloud/AbInitioSoftwareBase.jl)
 [![Coverage](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl)
 [![Coverage](https://coveralls.io/repos/github/MineralsCloud/AbInitioSoftwareBase.jl/badge.svg?branch=master)](https://coveralls.io/github/MineralsCloud/AbInitioSoftwareBase.jl?branch=master)
+
+This package provides a common API for some ab initio software.
