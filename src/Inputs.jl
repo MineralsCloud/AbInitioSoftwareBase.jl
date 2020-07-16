@@ -5,6 +5,7 @@ export Input, inputstring, titleof, write_input
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
 
+"Return a `String` that represents the input of the software. Need to be implemented."
 function inputstring end
 
 function titleof end
