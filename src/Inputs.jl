@@ -32,4 +32,6 @@ function write_input(file, object::Input, dry_run = false)
     return
 end
 
+include("Formats.jl")
+
 end
