@@ -14,6 +14,7 @@ makedocs(;
     pages = [
         "Home" => "index.md",
         "Manual" => ["Installation" => "install.md", "Development" => "develop.md"],
+        "Troubleshooting" => "troubleshooting.md",
         "API by module" => [
             "`AbInitioSoftwareBase` module" => "api/api.md",
             "`Inputs` module" => "api/Inputs.md",
