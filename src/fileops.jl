@@ -8,28 +8,28 @@ export FilePath, load, save
 const FilePath = AbstractPath
 
 """
-    save(filepath, data)
+    save(file, data)
 
-Save `data` to `filepath`.
+Save `data` to `file`.
 
-By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `filepath` extension.
+By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 
 !!! warning
     Allowed `data` types can be referenced in [`JSON.jl` documentation](https://github.com/JuliaIO/JSON.jl/blob/master/README.md)
     and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
     For `TOML` format, only `AbstractDict` type is allowed.
 """
-function save(filepath, data)
-    ext, fp = extension(filepath), abspath(expanduser(filepath))
+function save(file, data)
+    ext, path = extension(file), abspath(expanduser(file))
     if ext ∈ ("yaml", "yml")
-        YAML.write_file(fp, data)
+        YAML.write_file(path, data)
     elseif ext == "json"
-        open(fp, "w") do io
+        open(path, "w") do io
             JSON.print(io, data)
         end
     elseif ext == "toml"
         typeassert(data, AbstractDict)
-        open(fp, "w") do io
+        open(path, "w") do io
             TOML.print(io, data)
         end
     else
@@ -38,30 +38,30 @@ function save(filepath, data)
 end # function save
 
 """
-    load(filepath)
+    load(file)
 
-load data from `filepath` to a `Dict`.
+load data from `file` to a `Dict`.
 
-By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `filepath` extension.
+By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-function load(filepath)
-    ext, fp = extension(filepath), abspath(expanduser(filepath))
+function load(file)
+    ext, path = extension(file), abspath(expanduser(file))
     if ext ∈ ("yaml", "yml")
-        return open(fp, "r") do io
+        return open(path, "r") do io
             YAML.load(io)
         end
     elseif ext == "json"
-        return JSON.parsefile(fp)
+        return JSON.parsefile(path)
     elseif ext == "toml"
-        return TOML.parsefile(fp)
+        return TOML.parsefile(path)
     else
         error("unknown file extension `$ext`!")
     end
 end # function load
 
-"Get the extension from `filepath`. Return an empty string if no extension is found."
-function extension(filepath)  # From https://github.com/rofinn/FilePathsBase.jl/blob/af850a4/src/path.jl#L331-L340
-    name = basename(filepath)
+"Get the extension from `file`. Return an empty string if no extension is found."
+function extension(file)  # From https://github.com/rofinn/FilePathsBase.jl/blob/af850a4/src/path.jl#L331-L340
+    name = basename(file)
     tokenized = split(name, '.')
     if length(tokenized) > 1
         return lowercase(tokenized[end])
