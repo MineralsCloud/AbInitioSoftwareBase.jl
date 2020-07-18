@@ -59,7 +59,11 @@ function load(file)
     end
 end # function load
 
-"Get the extension from `file`. Return an empty string if no extension is found."
+"""
+    extension(file)
+
+Get the extension from `file`. Return an empty string if no extension is found.
+"""
 function extension(file)  # From https://github.com/rofinn/FilePathsBase.jl/blob/af850a4/src/path.jl#L331-L340
     name = basename(file)
     tokenized = split(name, '.')
