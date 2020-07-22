@@ -1,6 +1,6 @@
 module Inputs
 
-export Input, inputstring, titleof, write_input
+export Input, inputstring, titleof, writeinput
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -10,27 +10,28 @@ function inputstring end
 
 function titleof end
 
+function writeinput(io::IO, object::Input)
+    write(io, inputstring(object))
+    return
+end # function writeinput
 """
-    write_input(file, object::Input, dry_run = false)
+    writeinput(io::IO, object::Input)
+    writeinput(file, object::Input)
 
-Write `object` to `file`. Use `dry_run = true` to print without actual writing.
+Write an `Input` object to `file` or `io`.
 """
-function write_input(file, object::Input, dry_run = false)
-    if dry_run
-        if isfile(file)
-            @warn "file `$file` will be overwritten!"
-        else
-            @warn "file `$file` will be created!"
-        end
-        print(inputstring(object))
+function writeinput(file, object::Input)
+    if isfile(file)
+        @warn "file `$file` will be overwritten!"
     else
-        mkpath(dirname(file))
-        open(file, "w") do io
-            write(io, inputstring(object))
-        end
+        @warn "file `$file` will be created!"
+    end
+    mkpath(dirname(file))
+    open(file, "w") do io
+        write(io, inputstring(object))
     end
     return
-end
+end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
 
 include("Formats.jl")
 
