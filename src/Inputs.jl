@@ -27,12 +27,11 @@ function writeinput(file, object::Input, dry_run::Bool = false)
         else
             @warn "file `$file` will be created!"
         end
-        println("The following will be write to file `$file`:")
         print(inputstring(object))
     else
         mkpath(dirname(file))
         open(file, "w") do io
-            write(io, inputstring(object))
+            writeinput(io, object)
         end
     end
     return
