@@ -3,7 +3,7 @@ using YAML
 using Pkg.TOML
 using FilePathsBase: AbstractPath
 
-export FilePath, load, save
+export FilePath, loadfile, savefile, savestring, loadstring
 
 const FilePath = AbstractPath
 
@@ -19,7 +19,7 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
     For `TOML` format, only `AbstractDict` type is allowed.
 """
-function save(file, data)
+function savefile(file, data)
     ext, path = extension(file), abspath(expanduser(file))
     if ext ∈ ("yaml", "yml")
         YAML.write_file(path, data)
@@ -44,7 +44,7 @@ load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-function load(file)
+function loadfile(file)
     ext, path = extension(file), abspath(expanduser(file))
     if ext ∈ ("yaml", "yml")
         return open(path, "r") do io
@@ -57,7 +57,7 @@ function load(file)
     else
         error("unknown file extension `$ext`!")
     end
-end # function load
+end # function loadfile
 
 """
     extension(file)
