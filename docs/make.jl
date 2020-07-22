@@ -16,7 +16,7 @@ makedocs(;
         "Manual" => ["Installation" => "install.md", "Development" => "develop.md"],
         "Troubleshooting" => "troubleshooting.md",
         "API by module" => [
-            "`AbInitioSoftwareBase` module" => "api/api.md",
+            "`AbInitioSoftwareBase` module" => "api/AbInitioSoftwareBase.md",
             "`Inputs` module" => "api/Inputs.md",
             "`CLI` module" => "api/CLI.md",
         ],
