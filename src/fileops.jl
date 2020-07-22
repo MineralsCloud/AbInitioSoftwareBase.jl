@@ -60,6 +60,24 @@ function loadfile(file)
 end # function loadfile
 
 """
+    loadstring(format, str)
+
+Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
+"""
+function loadstring(format, str)
+    format = lowercase(string(format))
+    if format ∈ ("yaml", "yml")
+        return YAML.load(str)
+    elseif format == "json"
+        return JSON.parse(str)
+    elseif format == "toml"
+        return TOML.parse(str)
+    else
+        error("unknown format: `$format`!")
+    end
+end # function loadstring
+
+"""
     extension(file)
 
 Get the extension from `file`. Return an empty string if no extension is found.
