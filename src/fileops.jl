@@ -3,12 +3,12 @@ using YAML
 using Pkg.TOML
 using FilePathsBase: AbstractPath
 
-export FilePath, load, save
+export FilePath, loadfile, savefile, loadstring
 
 const FilePath = AbstractPath
 
 """
-    save(file, data)
+    savefile(file, data)
 
 Save `data` to `file`.
 
@@ -19,7 +19,7 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
     For `TOML` format, only `AbstractDict` type is allowed.
 """
-function save(file, data)
+function savefile(file, data)
     ext, path = extension(file), abspath(expanduser(file))
     if ext ∈ ("yaml", "yml")
         YAML.write_file(path, data)
@@ -35,16 +35,16 @@ function save(file, data)
     else
         error("unknown file extension `$ext`!")
     end
-end # function save
+end # function savefile
 
 """
-    load(file)
+    loadfile(file)
 
-load data from `file` to a `Dict`.
+Load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-function load(file)
+function loadfile(file)
     ext, path = extension(file), abspath(expanduser(file))
     if ext ∈ ("yaml", "yml")
         return open(path, "r") do io
@@ -57,7 +57,25 @@ function load(file)
     else
         error("unknown file extension `$ext`!")
     end
-end # function load
+end # function loadfile
+
+"""
+    loadstring(format, str)
+
+Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
+"""
+function loadstring(format, str)
+    format = lowercase(string(format))
+    if format ∈ ("yaml", "yml")
+        return YAML.load(str)
+    elseif format == "json"
+        return JSON.parse(str)
+    elseif format == "toml"
+        return TOML.parse(str)
+    else
+        error("unknown format: `$format`!")
+    end
+end # function loadstring
 
 """
     extension(file)
