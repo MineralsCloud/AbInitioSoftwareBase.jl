@@ -3,12 +3,12 @@ using YAML
 using Pkg.TOML
 using FilePathsBase: AbstractPath
 
-export FilePath, loadfile, savefile, savestring, loadstring
+export FilePath, loadfile, savefile, loadstring
 
 const FilePath = AbstractPath
 
 """
-    save(file, data)
+    savefile(file, data)
 
 Save `data` to `file`.
 
@@ -35,12 +35,12 @@ function savefile(file, data)
     else
         error("unknown file extension `$ext`!")
     end
-end # function save
+end # function savefile
 
 """
-    load(file)
+    loadfile(file)
 
-load data from `file` to a `Dict`.
+Load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
