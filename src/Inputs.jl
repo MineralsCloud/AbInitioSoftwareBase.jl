@@ -1,6 +1,13 @@
 module Inputs
 
-export Input, inputstring, titleof, writeinput
+export Input,
+    inputstring,
+    titleof,
+    writeinput,
+    set_verbosity,
+    set_temperature,
+    set_pressure_volume,
+    set_structure
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -38,5 +45,13 @@ function writeinput(file, object::Input, dry_run::Bool = false)
 end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
 
 include("Formats.jl")
+
+function set_verbosity end
+
+function set_temperature end
+
+function set_pressure_volume end
+
+function set_structure end
 
 end
