@@ -4,10 +4,10 @@ export Input,
     inputstring,
     titleof,
     writeinput,
-    set_verbosity,
-    set_temperature,
-    set_pressure_volume,
-    set_structure
+    setverbosity,
+    set_elec_temp,
+    set_press_vol,
+    setcell
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -46,12 +46,12 @@ end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles
 
 include("Formats.jl")
 
-function set_verbosity end
+function setverbosity end
 
-function set_temperature end
+function set_elec_temp end
 
-function set_pressure_volume end
+function set_press_vol end
 
-function set_structure end
+function setcell end
 
 end
