@@ -1,13 +1,7 @@
 module Inputs
 
 export Input,
-    inputstring,
-    titleof,
-    writeinput,
-    setverbosity,
-    set_elec_temp,
-    set_press_vol,
-    setcell
+    inputstring, titleof, writeinput, setverbosity, set_elec_temp, set_press_vol, setcell
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
