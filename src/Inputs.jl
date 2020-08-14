@@ -1,18 +1,12 @@
 module Inputs
 
 export Input,
-    inputstring,
-    titleof,
-    writeinput,
-    setverbosity,
-    set_elec_temp,
-    set_press_vol,
-    setcell
+    inputstring, titleof, writeinput, set_verbosity, set_elec_temp, set_press_vol, set_cell
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
 
-"Return a `String` that represents the input of the software. Need to be implemented."
+"Return an `AbstractString,` that represents the input of the software. Need to be implemented."
 function inputstring end
 
 function titleof end
@@ -46,12 +40,12 @@ end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles
 
 include("Formats.jl")
 
-function setverbosity end
+function set_verbosity end
 
 function set_elec_temp end
 
 function set_press_vol end
 
-function setcell end
+function set_cell end
 
 end
