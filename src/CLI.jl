@@ -13,11 +13,11 @@ struct MpiExec
     "Specify the number of processes to use."
     np::UInt
     "Path to the `mpiexec` or `mpirun` executable."
-    bin
+    bin::Any
     "List of hosts on which to invoke processes."
     host::Vector
     "Provide a hostfile to use."
-    hostfile
+    hostfile::Any
     "Other args to be specified. Must be a `Vector` of `Pair`s."
     args::Vector
 end
