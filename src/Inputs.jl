@@ -13,9 +13,9 @@ function titleof end
 
 """
     writeinput(io::IO, object::Input)
-    writeinput(file, object::Input, dry_run::Bool = false)
+    writeinput(file, object::Input)
 
-Write an `Input` object to `file` or `io`. Use `dry_run = true` to preview changes.
+Write an `Input` object to `file` or `io` using corresponding string format.
 """
 function writeinput(io::IO, object::Input)
     write(io, inputstring(object))
