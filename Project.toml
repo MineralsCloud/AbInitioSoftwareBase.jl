@@ -6,6 +6,7 @@ version = "0.1.0"
 [deps]
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+UrlDownload = "856ac37a-3032-4c1c-9122-f86d88358c8b"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [compat]
