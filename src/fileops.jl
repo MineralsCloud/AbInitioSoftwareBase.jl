@@ -1,4 +1,5 @@
 import JSON
+using UrlDownload: File, URL, urldownload
 import YAML
 import Pkg.TOML
 
@@ -88,3 +89,5 @@ function extension(file)  # From https://github.com/rofinn/FilePathsBase.jl/blob
         return ""
     end
 end
+
+Base.basename(x::Union{File,URL}) = basename(x.name)
