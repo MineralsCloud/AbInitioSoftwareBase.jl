@@ -3,7 +3,7 @@ using UrlDownload: File, URL, urldownload
 import YAML
 import Pkg.TOML
 
-export loadfile, savefile, loadstring
+export load, save, loads
 
 """
     savefile(file, data)
@@ -17,7 +17,7 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
     For `TOML` format, only `AbstractDict` type is allowed.
 """
-function savefile(file, data)
+function save(file, data)
     ext, path = extension(file), expanduser(file)
     if ext ∈ ("yaml", "yml")
         YAML.write_file(path, data)
@@ -42,7 +42,7 @@ Load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-function loadfile(file)
+function load(file)  # AbstractString, URL, File
     ext, path = extension(file), expanduser(file)
     if ext ∈ ("yaml", "yml")
         return open(path, "r") do io
@@ -62,7 +62,7 @@ end
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
-function loadstring(format::AbstractString, str)
+function loads(format::AbstractString, str)
     format = lowercase(string(format))
     if format ∈ ("yaml", "yml")
         return YAML.load(str)
