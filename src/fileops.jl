@@ -62,7 +62,7 @@ end
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
-function loadstring(format, str)
+function loadstring(format::AbstractString, str)
     format = lowercase(string(format))
     if format ∈ ("yaml", "yml")
         return YAML.load(str)
