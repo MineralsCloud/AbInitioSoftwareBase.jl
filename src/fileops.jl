@@ -30,7 +30,7 @@ function savefile(file, data)
             TOML.print(io, data)
         end
     else
-        error("unknown file extension `$ext`!")
+        error("unsupported file extension `$ext`!")
     end
 end
 
@@ -52,7 +52,7 @@ function loadfile(file)
     elseif ext == "toml"
         return TOML.parsefile(path)
     else
-        error("unknown file extension `$ext`!")
+        error("unsupported file extension `$ext`!")
     end
 end
 
@@ -70,7 +70,7 @@ function loadstring(format, str)
     elseif format == "toml"
         return TOML.parse(str)
     else
-        error("unknown format: `$format`!")
+        error("unsupported format: `$format`!")
     end
 end
 
