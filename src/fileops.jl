@@ -1,6 +1,6 @@
-using JSON
-using YAML
-using Pkg.TOML
+import JSON
+import YAML
+import Pkg.TOML
 
 export loadfile, savefile, loadstring
 
@@ -32,7 +32,7 @@ function savefile(file, data)
     else
         error("unknown file extension `$ext`!")
     end
-end # function savefile
+end
 
 """
     loadfile(file)
@@ -54,7 +54,7 @@ function loadfile(file)
     else
         error("unknown file extension `$ext`!")
     end
-end # function loadfile
+end
 
 """
     loadstring(format, str)
@@ -72,7 +72,7 @@ function loadstring(format, str)
     else
         error("unknown format: `$format`!")
     end
-end # function loadstring
+end
 
 """
     extension(file)
