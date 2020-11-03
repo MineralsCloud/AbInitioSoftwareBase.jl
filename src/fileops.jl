@@ -1,5 +1,6 @@
 import JSON
 using UrlDownload: File, URL, urldownload
+using IsURL: isurl
 import YAML
 import Pkg.TOML
 
@@ -42,8 +43,10 @@ Load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-function load(file)  # AbstractString, URL, File
-    ext, path = extension(file), expanduser(file)
+load(parser, url_or_file) = parser(filepath(url_or_file))
+function load(url_or_file)
+    path = filepath(url_or_file)
+    ext = extension(path)
     if ext ∈ ("yaml", "yml")
         return open(path, "r") do io
             YAML.load(io)
@@ -53,7 +56,19 @@ function load(file)  # AbstractString, URL, File
     elseif ext == "toml"
         return TOML.parsefile(path)
     else
-        error("unsupported file extension `$ext`!")
+        error("unsupported file extension `$ext`! Please provide a `parser`!")
+    end
+end
+
+function filepath(url_or_file)
+    if isurl(url_or_file)
+        return download(url_or_file, joinpath(mktempdir(), basename(url_or_file)))
+    else
+        if isfile(url_or_file)
+            return expanduser(url_or_file)
+        else
+            error("file \"$url_or_file\" does not exists!")
+        end
     end
 end
 
