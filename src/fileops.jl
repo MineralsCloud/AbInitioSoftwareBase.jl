@@ -1,11 +1,8 @@
-using JSON
-using YAML
-using Pkg.TOML
-using FilePathsBase: AbstractPath
+import JSON
+import YAML
+import Pkg.TOML
 
-export FilePath, loadfile, savefile, loadstring
-
-const FilePath = AbstractPath
+export loadfile, savefile, loadstring
 
 """
     savefile(file, data)
@@ -20,7 +17,7 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     For `TOML` format, only `AbstractDict` type is allowed.
 """
 function savefile(file, data)
-    ext, path = extension(file), abspath(expanduser(file))
+    ext, path = extension(file), expanduser(file)
     if ext ∈ ("yaml", "yml")
         YAML.write_file(path, data)
     elseif ext == "json"
@@ -35,7 +32,7 @@ function savefile(file, data)
     else
         error("unknown file extension `$ext`!")
     end
-end # function savefile
+end
 
 """
     loadfile(file)
@@ -45,7 +42,7 @@ Load data from `file` to a `Dict`.
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
 function loadfile(file)
-    ext, path = extension(file), abspath(expanduser(file))
+    ext, path = extension(file), expanduser(file)
     if ext ∈ ("yaml", "yml")
         return open(path, "r") do io
             YAML.load(io)
@@ -57,7 +54,7 @@ function loadfile(file)
     else
         error("unknown file extension `$ext`!")
     end
-end # function loadfile
+end
 
 """
     loadstring(format, str)
@@ -75,7 +72,7 @@ function loadstring(format, str)
     else
         error("unknown format: `$format`!")
     end
-end # function loadstring
+end
 
 """
     extension(file)
