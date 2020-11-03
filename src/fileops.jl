@@ -1,8 +1,9 @@
 import JSON
+using IsURL: isurl
 import YAML
 import Pkg.TOML
 
-export loadfile, savefile, loadstring
+export load, save, loads
 
 """
     savefile(file, data)
@@ -16,7 +17,7 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
     For `TOML` format, only `AbstractDict` type is allowed.
 """
-function savefile(file, data)
+function save(file, data)
     ext, path = extension(file), expanduser(file)
     if ext ∈ ("yaml", "yml")
         YAML.write_file(path, data)
@@ -30,7 +31,7 @@ function savefile(file, data)
             TOML.print(io, data)
         end
     else
-        error("unknown file extension `$ext`!")
+        error("unsupported file extension `$ext`!")
     end
 end
 
@@ -41,8 +42,10 @@ Load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-function loadfile(file)
-    ext, path = extension(file), expanduser(file)
+load(parser, url_or_file) = parser(filepath(url_or_file))
+function load(url_or_file)
+    path = filepath(url_or_file)
+    ext = extension(path)
     if ext ∈ ("yaml", "yml")
         return open(path, "r") do io
             YAML.load(io)
@@ -52,7 +55,19 @@ function loadfile(file)
     elseif ext == "toml"
         return TOML.parsefile(path)
     else
-        error("unknown file extension `$ext`!")
+        error("unsupported file extension `$ext`! Please provide a `parser`!")
+    end
+end
+
+function filepath(url_or_file)
+    if isurl(url_or_file)
+        return download(url_or_file, joinpath(mktempdir(), basename(url_or_file)))
+    else
+        if isfile(url_or_file)
+            return expanduser(url_or_file)
+        else
+            error("file \"$url_or_file\" does not exists!")
+        end
     end
 end
 
@@ -61,7 +76,7 @@ end
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
-function loadstring(format, str)
+function loads(format::AbstractString, str)
     format = lowercase(string(format))
     if format ∈ ("yaml", "yml")
         return YAML.load(str)
@@ -70,9 +85,10 @@ function loadstring(format, str)
     elseif format == "toml"
         return TOML.parse(str)
     else
-        error("unknown format: `$format`!")
+        error("unsupported format: `$format`!")
     end
 end
+loads(parser, str) = parser(str)
 
 """
     extension(file)
