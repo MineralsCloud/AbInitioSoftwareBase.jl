@@ -1,11 +1,8 @@
 using JSON
 using YAML
 using Pkg.TOML
-using FilePathsBase: AbstractPath
 
-export FilePath, loadfile, savefile, loadstring
-
-const FilePath = AbstractPath
+export loadfile, savefile, loadstring
 
 """
     savefile(file, data)
