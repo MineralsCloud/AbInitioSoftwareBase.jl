@@ -89,6 +89,7 @@ function loads(format::AbstractString, str)
         error("unsupported format: `$format`!")
     end
 end
+loads(parser, str) = parser(str)
 
 """
     extension(file)
