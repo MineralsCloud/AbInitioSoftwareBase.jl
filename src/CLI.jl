@@ -3,11 +3,11 @@ module CLI
 export Mpiexec
 
 """
-    MpiExec(np; bin = "mpiexec", host = [], hostfile = "", args = Pair[])
+    Mpiexec(np; bin = "mpiexec", host = [], hostfile = "", args = Pair[])
 
 Represent the `mpiexec` or `mpirun` executable. Must be combined with an actual command.
 
-Type `?MpiExec.host` to see the documentation of the `host` parameter, and so on.
+Type `?Mpiexec.host` to see the documentation of the `host` parameter, and so on.
 """
 struct Mpiexec
     "Specify the number of processes to use."
