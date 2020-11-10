@@ -1,7 +1,13 @@
 module Inputs
 
 export Input,
-    inputstring, titleof, writeinput, set_verbosity, set_elec_temp, set_press_vol, set_cell
+    inputstring,
+    groupname,
+    writeinput,
+    set_verbosity,
+    set_elec_temp,
+    set_press_vol,
+    set_cell
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -9,7 +15,7 @@ abstract type Input end
 "Return an `AbstractString,` that represents the input of the software. Need to be implemented."
 function inputstring end
 
-function titleof end
+function groupname end
 
 """
     writeinput(io::IO, object::Input)
