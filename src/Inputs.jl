@@ -12,6 +12,15 @@ export Input,
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
 
+abstract type InputEntry end  # Define this to make the `eltype` not `Any` if both `Namelist` & `Card` exist.
+
+"""
+    Namelist <: InputEntry
+
+The abstraction of an component of a `Input`, a basic Fortran data structure.
+"""
+abstract type Namelist <: InputEntry end
+
 "Return an `AbstractString,` that represents the input of the software. Need to be implemented."
 function inputstring end
 
