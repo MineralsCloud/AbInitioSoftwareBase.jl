@@ -28,7 +28,7 @@ function writeinput(file, object::Input)
     end
 end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
 
-include("Formats.jl")
+include("Formatter.jl")
 
 function set_verbosity end
 

@@ -1,4 +1,4 @@
-module Formats
+module Formatter
 
 export delimiter, newline, indent, floatfmt, intfmt
 
