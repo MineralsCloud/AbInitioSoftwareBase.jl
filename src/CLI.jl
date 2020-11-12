@@ -1,6 +1,6 @@
 module CLI
 
-export Mpiexec, AbInitioSoftwareExec, commandify
+export Mpiexec, AbInitioSoftwareBin, scriptify
 
 """
     Mpiexec(np; bin = "mpiexec", host = [], hostfile = "", args = Pair[])
@@ -24,8 +24,8 @@ end
 Mpiexec(np; bin = "mpiexec", host = String[], hostfile = "", args = Pair[]) =
     Mpiexec(np, bin, host, hostfile, args)
 
-abstract type AbInitioSoftwareExec end
+abstract type AbInitioSoftwareBin end
 
-function commandify end
+function scriptify end
 
 end
