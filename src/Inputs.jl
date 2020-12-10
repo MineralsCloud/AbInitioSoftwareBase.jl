@@ -1,13 +1,6 @@
 module Inputs
 
-export Input,
-    inputstring,
-    groupname,
-    writeinput,
-    set_verbosity,
-    set_elec_temp,
-    set_press_vol,
-    set_cell
+export Input, inputstring, groupname, writeinput
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -45,13 +38,6 @@ end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles
 
 include("Formatter.jl")
 
-function set_verbosity end
-
-function set_elec_temp end
-
-function set_press_vol end
-
-function set_cell end
 abstract type Setter end
 
 end
