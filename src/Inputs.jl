@@ -52,5 +52,6 @@ function set_elec_temp end
 function set_press_vol end
 
 function set_cell end
+abstract type Setter end
 
 end
