@@ -20,18 +20,18 @@ function inputstring end
 function groupname end
 
 """
-    writeinput(io::IO, object::Input)
-    writeinput(file, object::Input)
+    writeinput(io::IO, input::Input)
+    writeinput(file, input::Input)
 
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
-function writeinput(io::IO, object::Input)
-    write(io, inputstring(object))
+function writeinput(io::IO, input::Input)
+    write(io, inputstring(input))
     return
 end
-function writeinput(file, object::Input)
+function writeinput(file, input::Input)
     open(file, "w") do io
-        writeinput(io, object)
+        writeinput(io, input)
     end
 end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
 
