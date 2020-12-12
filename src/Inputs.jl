@@ -30,7 +30,6 @@ function writeinput(io::IO, object::Input)
     return
 end
 function writeinput(file, object::Input)
-    mkpath(dirname(file))
     open(file, "w") do io
         writeinput(io, object)
     end
