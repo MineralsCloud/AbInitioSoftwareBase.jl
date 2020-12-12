@@ -14,7 +14,7 @@ The abstraction of an component of a `Input`, a basic Fortran data structure.
 """
 abstract type Namelist <: InputEntry end
 
-"Return an `AbstractString,` that represents the input of the software. Need to be implemented."
+"Return a `String` representation of the input of the software. To be implemented."
 function inputstring end
 
 function groupname end
