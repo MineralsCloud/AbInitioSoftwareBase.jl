@@ -1,7 +1,7 @@
 name = "AbInitioSoftwareBase"
 uuid = "df5135bc-470e-46c6-b451-292e27ca5b84"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 IsURL = "ceb4388c-583f-448d-bb30-00b11e8c5682"
