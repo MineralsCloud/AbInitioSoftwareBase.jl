@@ -87,6 +87,17 @@ load(parser, url_or_file) = parser(filepath(url_or_file))
 function load(url_or_file)
     path = filepath(url_or_file)
     ext = extension(path)
+    _load(path, format(Val(Symbol(ext))))
+end
+_load(path, ::DataFormat{:JSON}) = JSON.parsefile(path)
+function _load(path, ::DataFormat{:TOML})
+    open(path, "r") do io
+        TOML.parse(io)
+    end
+end
+function _load(path, ::DataFormat{:YAML})
+    open(path, "r") do io
+        YAML.load(io)
     end
 end
 
