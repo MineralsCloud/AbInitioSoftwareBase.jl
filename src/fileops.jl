@@ -24,6 +24,23 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     For `TOML` format, only `AbstractDict` type is allowed.
 """
 function save(file, data)
+    path, ext = expanduser(file), extension(file)
+    _save(path, format(Val(Symbol(ext))), data)
+    return
+end
+function _save(f, ::DataFormat{:JSON}, data)
+    open(f, "w") do io
+        JSON.print(io, data)
+    end
+end
+function _save(f, ::DataFormat{:TOML}, data::AbstractDict)
+    open(f, "w") do io
+        TOML.print(io, data)
+    end
+end
+function _save(f, ::DataFormat{:YAML}, data)
+    open(f, "w") do io
+        YAML.write(io, data, "")
     end
 end
 # function save(file, data)
