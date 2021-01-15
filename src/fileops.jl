@@ -69,19 +69,24 @@ Load data from `file` to a `Dict`.
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
 load(parser, url_or_file) = parser(filepath(url_or_file))
+# function load(url_or_file)
+#     path = filepath(url_or_file)
+#     ext = extension(path)
+#     if ext ∈ ("yaml", "yml")
+#         return open(path, "r") do io
+#             YAML.load(io)
+#         end
+#     elseif ext == "json"
+#         return JSON.parsefile(path)
+#     elseif ext == "toml"
+#         return TOML.parsefile(path)
+#     else
+#         error("unsupported file extension `$ext`! Please provide a `parser`!")
+#     end
+# end
 function load(url_or_file)
     path = filepath(url_or_file)
     ext = extension(path)
-    if ext ∈ ("yaml", "yml")
-        return open(path, "r") do io
-            YAML.load(io)
-        end
-    elseif ext == "json"
-        return JSON.parsefile(path)
-    elseif ext == "toml"
-        return TOML.parsefile(path)
-    else
-        error("unsupported file extension `$ext`! Please provide a `parser`!")
     end
 end
 
