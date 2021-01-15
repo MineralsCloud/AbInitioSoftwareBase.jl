@@ -5,6 +5,12 @@ import Pkg.TOML
 
 export load, save, loads
 
+struct DataFormat{T} end
+
+format(::Val{:json}) = DataFormat{:JSON}()
+format(::Union{Val{:yaml},Val{:yml}}) = DataFormat{:YAML}()
+format(::Val{:toml}) = DataFormat{:TOML}()
+
 """
     savefile(file, data)
 
