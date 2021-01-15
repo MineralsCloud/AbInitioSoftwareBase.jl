@@ -117,19 +117,9 @@ end
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
-function loads(format::AbstractString, str)
-    format = lowercase(string(format))
-    if format ∈ ("yaml", "yml")
-        return YAML.load(str)
-    elseif format == "json"
-        return JSON.parse(str)
-    elseif format == "toml"
-        return TOML.parse(str)
-    else
-        error("unsupported format: `$format`!")
-    end
-end
-loads(parser, str) = parser(str)
+loads(str, ::DataFormat{:JSON}) = JSON.parse(str)
+loads(str, ::DataFormat{:TOML}) = TOML.parse(str)
+loads(str, ::DataFormat{:YAML}) = YAML.load(str)
 
 """
     extension(file)
