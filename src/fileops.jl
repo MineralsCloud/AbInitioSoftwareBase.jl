@@ -12,7 +12,7 @@ format(::Union{Val{:yaml},Val{:yml}}) = DataFormat{:YAML}()
 format(::Val{:toml}) = DataFormat{:TOML}()
 
 """
-    savefile(file, data)
+    save(file, data)
 
 Save `data` to `file`.
 
@@ -62,7 +62,7 @@ end
 # end
 
 """
-    loadfile(file)
+    load(file)
 
 Load data from `file` to a `Dict`.
 
@@ -113,7 +113,7 @@ function filepath(url_or_file)
 end
 
 """
-    loadstring(format, str)
+    loads(format, str)
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
