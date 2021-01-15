@@ -113,7 +113,7 @@ function filepath(url_or_file)
 end
 
 """
-    loads(format, str)
+    loads(str, format)
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
