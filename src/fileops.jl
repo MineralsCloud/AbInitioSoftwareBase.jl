@@ -5,6 +5,12 @@ import Pkg.TOML
 
 export load, save, loads
 
+struct DataFormat{T} end
+
+format(::Val{:json}) = DataFormat{:JSON}()
+format(::Union{Val{:yaml},Val{:yml}}) = DataFormat{:YAML}()
+format(::Val{:toml}) = DataFormat{:TOML}()
+
 """
     savefile(file, data)
 
@@ -18,22 +24,42 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     For `TOML` format, only `AbstractDict` type is allowed.
 """
 function save(file, data)
-    ext, path = extension(file), expanduser(file)
-    if ext ∈ ("yaml", "yml")
-        YAML.write_file(path, data)
-    elseif ext == "json"
-        open(path, "w") do io
-            JSON.print(io, data)
-        end
-    elseif ext == "toml"
-        typeassert(data, AbstractDict)
-        open(path, "w") do io
-            TOML.print(io, data)
-        end
-    else
-        error("unsupported file extension `$ext`!")
+    path, ext = expanduser(file), extension(file)
+    _save(path, format(Val(Symbol(ext))), data)
+    return
+end
+function _save(f, ::DataFormat{:JSON}, data)
+    open(f, "w") do io
+        JSON.print(io, data)
     end
 end
+function _save(f, ::DataFormat{:TOML}, data::AbstractDict)
+    open(f, "w") do io
+        TOML.print(io, data)
+    end
+end
+function _save(f, ::DataFormat{:YAML}, data)
+    open(f, "w") do io
+        YAML.write(io, data, "")
+    end
+end
+# function save(file, data)
+#     ext, path = extension(file), expanduser(file)
+#     if ext ∈ ("yaml", "yml")
+#         YAML.write_file(path, data)
+#     elseif ext == "json"
+#         open(path, "w") do io
+#             JSON.print(io, data)
+#         end
+#     elseif ext == "toml"
+#         typeassert(data, AbstractDict)
+#         open(path, "w") do io
+#             TOML.print(io, data)
+#         end
+#     else
+#         error("unsupported file extension `$ext`!")
+#     end
+# end
 
 """
     loadfile(file)
@@ -42,20 +68,35 @@ Load data from `file` to a `Dict`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 """
-load(parser, url_or_file) = parser(filepath(url_or_file))
+# function load(url_or_file)
+#     path = filepath(url_or_file)
+#     ext = extension(path)
+#     if ext ∈ ("yaml", "yml")
+#         return open(path, "r") do io
+#             YAML.load(io)
+#         end
+#     elseif ext == "json"
+#         return JSON.parsefile(path)
+#     elseif ext == "toml"
+#         return TOML.parsefile(path)
+#     else
+#         error("unsupported file extension `$ext`! Please provide a `parser`!")
+#     end
+# end
 function load(url_or_file)
     path = filepath(url_or_file)
     ext = extension(path)
-    if ext ∈ ("yaml", "yml")
-        return open(path, "r") do io
-            YAML.load(io)
-        end
-    elseif ext == "json"
-        return JSON.parsefile(path)
-    elseif ext == "toml"
-        return TOML.parsefile(path)
-    else
-        error("unsupported file extension `$ext`! Please provide a `parser`!")
+    _load(path, format(Val(Symbol(ext))))
+end
+_load(path, ::DataFormat{:JSON}) = JSON.parsefile(path)
+function _load(path, ::DataFormat{:TOML})
+    open(path, "r") do io
+        TOML.parse(io)
+    end
+end
+function _load(path, ::DataFormat{:YAML})
+    open(path, "r") do io
+        YAML.load(io)
     end
 end
 
@@ -76,19 +117,9 @@ end
 
 Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"` and `"toml"`.
 """
-function loads(format::AbstractString, str)
-    format = lowercase(string(format))
-    if format ∈ ("yaml", "yml")
-        return YAML.load(str)
-    elseif format == "json"
-        return JSON.parse(str)
-    elseif format == "toml"
-        return TOML.parse(str)
-    else
-        error("unsupported format: `$format`!")
-    end
-end
-loads(parser, str) = parser(str)
+loads(str, ::DataFormat{:JSON}) = JSON.parse(str)
+loads(str, ::DataFormat{:TOML}) = TOML.parse(str)
+loads(str, ::DataFormat{:YAML}) = YAML.load(str)
 
 """
     extension(file)
