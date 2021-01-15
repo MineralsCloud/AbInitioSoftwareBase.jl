@@ -24,22 +24,25 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
     For `TOML` format, only `AbstractDict` type is allowed.
 """
 function save(file, data)
-    ext, path = extension(file), expanduser(file)
-    if ext ∈ ("yaml", "yml")
-        YAML.write_file(path, data)
-    elseif ext == "json"
-        open(path, "w") do io
-            JSON.print(io, data)
-        end
-    elseif ext == "toml"
-        typeassert(data, AbstractDict)
-        open(path, "w") do io
-            TOML.print(io, data)
-        end
-    else
-        error("unsupported file extension `$ext`!")
     end
 end
+# function save(file, data)
+#     ext, path = extension(file), expanduser(file)
+#     if ext ∈ ("yaml", "yml")
+#         YAML.write_file(path, data)
+#     elseif ext == "json"
+#         open(path, "w") do io
+#             JSON.print(io, data)
+#         end
+#     elseif ext == "toml"
+#         typeassert(data, AbstractDict)
+#         open(path, "w") do io
+#             TOML.print(io, data)
+#         end
+#     else
+#         error("unsupported file extension `$ext`!")
+#     end
+# end
 
 """
     loadfile(file)
