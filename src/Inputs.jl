@@ -1,6 +1,6 @@
 module Inputs
 
-export Input, groupname, writeinput
+export Input, groupname, writetxt
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -22,13 +22,13 @@ function groupname end
 
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
-function writeinput(io::IO, input::Input)
+function writetxt(io::IO, input::Input)
     write(io, show(io, MIME("text/plain"), input))
     return
 end
-function writeinput(file, input::Input)
+function writetxt(file, input::Input)
     open(file, "w") do io
-        writeinput(io, input)
+        writetxt(io, input)
     end
 end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
 
