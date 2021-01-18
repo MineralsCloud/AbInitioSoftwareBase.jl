@@ -1,8 +1,8 @@
 module CLI
 
-export AbInitioSoftwareBin, scriptify
+export Executable, scriptify
 
-abstract type AbInitioSoftwareBin end
+abstract type Executable end
 
 function scriptify end
 
