@@ -1,6 +1,6 @@
 module Inputs
 
-export Input, inputstring, groupname, writeinput
+export Input, groupname, writeinput
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -14,9 +14,6 @@ The abstraction of an component of a `Input`, a basic Fortran data structure.
 """
 abstract type Namelist <: InputEntry end
 
-"Return a `String` representation of the input of the software. To be implemented."
-function inputstring end
-
 function groupname end
 
 """
@@ -26,7 +23,7 @@ function groupname end
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
 function writeinput(io::IO, input::Input)
-    write(io, inputstring(input))
+    write(io, show(io, MIME("text/plain"), input))
     return
 end
 function writeinput(file, input::Input)
