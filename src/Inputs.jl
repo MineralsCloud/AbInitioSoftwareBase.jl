@@ -1,6 +1,6 @@
 module Inputs
 
-export Input, groupname, writetxt
+export groupname, writetxt
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
