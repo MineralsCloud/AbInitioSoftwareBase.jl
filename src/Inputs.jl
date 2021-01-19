@@ -1,6 +1,6 @@
 module Inputs
 
-export groupname, writetxt
+export groupname, writetxt, asstring
 
 "An abstract type representing an input object of ab initio software."
 abstract type Input end
@@ -16,6 +16,8 @@ abstract type Namelist <: InputEntry end
 
 function groupname end
 
+function asstring end
+
 """
     writeinput(io::IO, input::Input)
     writeinput(file, input::Input)
@@ -23,7 +25,7 @@ function groupname end
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
 function writetxt(io::IO, input::Input)
-    write(io, show(io, MIME("text/plain"), input))
+    write(io, asstring(input))
     return
 end
 function writetxt(file, input::Input)
