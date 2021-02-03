@@ -17,6 +17,10 @@ struct Mpiexec <: Executable
     np::UInt
     "Path to the `mpiexec` or `mpirun` executable."
     args::Vector{<:Pair}
+    function Mpiexec(np, args)
+        @assert np >= 1
+        return new(np, args)
+    end
 end
 Mpiexec(np::Integer, args::AbstractVector{<:Pair}) = Mpiexec(np, args)
 Mpiexec(np::Integer) = Mpiexec(np, Pair[])
