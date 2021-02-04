@@ -3,7 +3,7 @@ using IsURL: isurl
 import YAML
 import Pkg.TOML
 
-export load, save, loads
+export load, save, loads, of_format
 
 struct DataFormat{T} end
 
@@ -120,6 +120,11 @@ Load data from `str` to a `Dict`. Allowed formats are `"yaml"`, `"yml"`, `"json"
 loads(str, ::DataFormat{:JSON}) = JSON.parse(str)
 loads(str, ::DataFormat{:TOML}) = TOML.parse(str)
 loads(str, ::DataFormat{:YAML}) = YAML.load(str)
+
+function of_format(to, from)
+    data = load(from)
+    return save(to, data)
+end
 
 """
     extension(file)
