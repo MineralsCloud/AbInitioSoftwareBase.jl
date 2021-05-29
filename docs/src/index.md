@@ -1,11 +1,10 @@
 ```@meta
 CurrentModule = AbInitioSoftwareBase
-DocTestSetup = :(using AbInitioSoftwareBase)
 ```
 
 # AbInitioSoftwareBase
 
-See the [Index](@ref main-index) for the complete list of documented functions and types.
+Documentation for [AbInitioSoftwareBase](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl).
 
 ```@contents
 Pages = [
