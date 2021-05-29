@@ -4,6 +4,6 @@ abstract type AbInitioSoftware end
 
 include("fileops.jl")
 include("Inputs.jl")
-include("Cli.jl")
+include("Commands.jl")
 
 end
