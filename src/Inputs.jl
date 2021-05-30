@@ -34,7 +34,7 @@ function writetxt(file, input::Input)
     end
 end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
 
-include("Formatter.jl")
+include("format.jl")
 
 abstract type Setter end
 
