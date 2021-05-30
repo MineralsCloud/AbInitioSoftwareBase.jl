@@ -14,6 +14,7 @@ The abstraction of an component of a `Input`, a basic Fortran data structure.
 """
 abstract type Namelist <: InputEntry end
 
+abstract type Card <: InputEntry end
 function groupname end
 
 function asstring end
