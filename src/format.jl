@@ -1,5 +1,3 @@
-module Formatter
-
 using Configurations: @option
 
 export FormatConfig
@@ -11,6 +9,4 @@ export FormatConfig
     float::String
     int::String
     bool::String
-end
-
 end
