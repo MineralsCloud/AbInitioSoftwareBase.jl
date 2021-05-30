@@ -31,15 +31,15 @@ Represent `CAR` or cards of an `Input` in VASP, Quantum ESPRESSO, etc.
 abstract type Card <: InputEntry end
 
 """
-    groupname(::Namelist)
+    groupname(namelist::Namelist)
 
 Get the group name of a `Namelist`.
 """
 function groupname end
 
 """
-    asstring(object, config::FormatConfig)
-    asstring(object; kwargs...)
+    asstring(object::Union{Input,InputEntry}, config::FormatConfig)
+    asstring(object::Union{Input,InputEntry}; kwargs...)
 
 Return a string representing a qualified `Input` or part of an `Input`, with formatting arguments `FormatConfig` or `kwargs`.
 

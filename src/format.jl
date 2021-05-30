@@ -9,7 +9,7 @@ Specify the formatting options of an `Input` or part of an `Input`.
 
 # Arguments
 - `delimiter::String`: the delimiter between objects. We suggest `" "`.
-- `newline::String`: the line terminator. Unix systems and macOS consider '\n' as a line terminator, while Windows supports '\r\n'. We suggest `"\n"`.
+- `newline::String`: the line terminator. Unix systems and macOS consider `'\\n'` as a line terminator, while Windows supports `'\\r\\n'`. We suggest `"\\n"`.
 - `indent::String`: the empty spaces at the beginning of a line. We suggest `' '^4`.
 - `float::String`: the format specification for `AbstractFloat`.
 - `int::String`: the format specification for `Integer`s.
