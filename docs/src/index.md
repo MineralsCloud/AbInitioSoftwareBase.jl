@@ -10,8 +10,10 @@ Documentation for [AbInitioSoftwareBase](https://github.com/MineralsCloud/AbInit
 Pages = [
     "install.md",
     "develop.md",
+    "troubleshooting.md",
+    "api/AbInitioSoftwareBase.md",
 ]
-Depth = 1
+Depth = 3
 ```
 
 ### [Index](@id main-index)
