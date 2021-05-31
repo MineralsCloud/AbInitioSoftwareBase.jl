@@ -131,12 +131,7 @@ end
 
 Get the extension from `file`. Return an empty string if no extension is found.
 """
-function extension(file)  # From https://github.com/rofinn/FilePathsBase.jl/blob/af850a4/src/path.jl#L331-L340
-    name = basename(file)
-    tokenized = split(name, '.')
-    if length(tokenized) > 1
-        return lowercase(tokenized[end])
-    else
-        return ""
-    end
+function extension(file)
+    ext = splitext(file)[2]  # `splitext` works from `FilePathsBase.AbstractPath` since version 0.7.0.
+    return isempty(ext) ? "" : lowercase(ext[2:end])
 end
