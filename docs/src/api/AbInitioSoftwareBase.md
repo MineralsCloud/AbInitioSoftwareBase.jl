@@ -7,8 +7,8 @@ CurrentModule = AbInitioSoftwareBase
 ## Public interfaces
 
 ```@docs
-extension
 load
 loads
 save
+of_format
 ```

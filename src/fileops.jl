@@ -43,23 +43,6 @@ function _save(f, ::DataFormat{:YAML}, data)
         YAML.write(io, data, "")
     end
 end
-# function save(file, data)
-#     ext, path = extension(file), expanduser(file)
-#     if ext ∈ ("yaml", "yml")
-#         YAML.write_file(path, data)
-#     elseif ext == "json"
-#         open(path, "w") do io
-#             JSON.print(io, data)
-#         end
-#     elseif ext == "toml"
-#         typeassert(data, AbstractDict)
-#         open(path, "w") do io
-#             TOML.print(io, data)
-#         end
-#     else
-#         error("unsupported file extension `$ext`!")
-#     end
-# end
 
 """
     load(file)
@@ -84,21 +67,6 @@ function _load(path, ::DataFormat{:YAML})
         YAML.load(io)
     end
 end
-# function load(url_or_file)
-#     path = filepath(url_or_file)
-#     ext = extension(path)
-#     if ext ∈ ("yaml", "yml")
-#         return open(path, "r") do io
-#             YAML.load(io)
-#         end
-#     elseif ext == "json"
-#         return JSON.parsefile(path)
-#     elseif ext == "toml"
-#         return TOML.parsefile(path)
-#     else
-#         error("unsupported file extension `$ext`! Please provide a `parser`!")
-#     end
-# end
 
 function filepath(url_or_file)
     if isurl(url_or_file)
@@ -121,9 +89,29 @@ loads(str, ::DataFormat{:JSON}) = JSON.parse(str)
 loads(str, ::DataFormat{:TOML}) = TOML.parse(str)
 loads(str, ::DataFormat{:YAML}) = YAML.load(str)
 
+"""
+    of_format(to, from)
+
+Convert `from` to the format of `to`. Similar to `oftype`.
+"""
 function of_format(to, from)
     data = load(from)
     return save(to, data)
+end
+
+"""
+    parentdir(file)
+
+Get the directory of a `file`.
+
+The problem of `dirname` is that it returns an empty string if users do not write `"./"` in the `file` path. This will cause an error in `tempname`.
+"""
+function parentdir(file)
+    dir = dirname(expanduser(file))
+    if isempty(dir)
+        dir = pwd()
+    end
+    return abspath(dir)
 end
 
 """
@@ -131,12 +119,7 @@ end
 
 Get the extension from `file`. Return an empty string if no extension is found.
 """
-function extension(file)  # From https://github.com/rofinn/FilePathsBase.jl/blob/af850a4/src/path.jl#L331-L340
-    name = basename(file)
-    tokenized = split(name, '.')
-    if length(tokenized) > 1
-        return lowercase(tokenized[end])
-    else
-        return ""
-    end
+function extension(file)
+    ext = splitext(file)[2]  # `splitext` works from `FilePathsBase.AbstractPath` since version 0.7.0.
+    return isempty(ext) ? "" : lowercase(ext[2:end])
 end
