@@ -20,7 +20,7 @@ makedocs(;
         "API by module" => [
             "`AbInitioSoftwareBase` module" => "api/AbInitioSoftwareBase.md",
             "`Inputs` module" => "api/Inputs.md",
-            "`CLI` module" => "api/CLI.md",
+            "`Commands` module" => "api/Commands.md",
         ],
     ],
 )

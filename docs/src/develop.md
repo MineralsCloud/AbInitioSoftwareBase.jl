@@ -7,7 +7,7 @@ Similar to section "[Installation](@ref)", run
 ```julia
 julia> using Pkg
 
-julia> pkg"dev git@github.com:MineralsCloud/AbInitioSoftwareBase.jl.git"
+julia> pkg"dev AbInitioSoftwareBase"
 ```
 
 Then the package will be cloned to your local machine at a path. On macOS, by default is

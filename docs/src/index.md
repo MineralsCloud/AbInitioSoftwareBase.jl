@@ -4,14 +4,20 @@ CurrentModule = AbInitioSoftwareBase
 
 # AbInitioSoftwareBase
 
-Documentation for [AbInitioSoftwareBase](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl).
+`AbInitioSoftwareBase.jl` is an interface package that defines some common API
+shared by some packages that represent different *ab initio* software like
+[Quantum ESPRESSO](https://www.quantum-espresso.org/), [VASP](https://www.vasp.at/), etc.
+The API will be extended in
+[`QuantumESPRESSOBase.jl`](https://github.com/MineralsCloud/QuantumESPRESSOBase.jl), etc.
 
 ```@contents
 Pages = [
     "install.md",
     "develop.md",
+    "troubleshooting.md",
+    "api/AbInitioSoftwareBase.md",
 ]
-Depth = 1
+Depth = 3
 ```
 
 ### [Index](@id main-index)
