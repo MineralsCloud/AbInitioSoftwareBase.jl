@@ -121,6 +121,11 @@ loads(str, ::DataFormat{:JSON}) = JSON.parse(str)
 loads(str, ::DataFormat{:TOML}) = TOML.parse(str)
 loads(str, ::DataFormat{:YAML}) = YAML.load(str)
 
+"""
+    of_format(to, from)
+
+Convert `from` to the format of `to`. Similar to `oftype`.
+"""
 function of_format(to, from)
     data = load(from)
     return save(to, data)
