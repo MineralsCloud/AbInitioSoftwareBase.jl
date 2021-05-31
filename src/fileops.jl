@@ -43,23 +43,6 @@ function _save(f, ::DataFormat{:YAML}, data)
         YAML.write(io, data, "")
     end
 end
-# function save(file, data)
-#     ext, path = extension(file), expanduser(file)
-#     if ext ∈ ("yaml", "yml")
-#         YAML.write_file(path, data)
-#     elseif ext == "json"
-#         open(path, "w") do io
-#             JSON.print(io, data)
-#         end
-#     elseif ext == "toml"
-#         typeassert(data, AbstractDict)
-#         open(path, "w") do io
-#             TOML.print(io, data)
-#         end
-#     else
-#         error("unsupported file extension `$ext`!")
-#     end
-# end
 
 """
     load(file)
@@ -84,21 +67,6 @@ function _load(path, ::DataFormat{:YAML})
         YAML.load(io)
     end
 end
-# function load(url_or_file)
-#     path = filepath(url_or_file)
-#     ext = extension(path)
-#     if ext ∈ ("yaml", "yml")
-#         return open(path, "r") do io
-#             YAML.load(io)
-#         end
-#     elseif ext == "json"
-#         return JSON.parsefile(path)
-#     elseif ext == "toml"
-#         return TOML.parsefile(path)
-#     else
-#         error("unsupported file extension `$ext`! Please provide a `parser`!")
-#     end
-# end
 
 function filepath(url_or_file)
     if isurl(url_or_file)
