@@ -127,6 +127,21 @@ function of_format(to, from)
 end
 
 """
+    parentdir(file)
+
+Get the directory of a `file`.
+
+The problem of `dirname` is that it returns an empty string if users do not write `"./"` in the `file` path. This will cause an error in `tempname`.
+"""
+function parentdir(file)
+    dir = dirname(expanduser(file))
+    if isempty(dir)
+        dir = pwd()
+    end
+    return abspath(dir)
+end
+
+"""
     extension(file)
 
 Get the extension from `file`. Return an empty string if no extension is found.
