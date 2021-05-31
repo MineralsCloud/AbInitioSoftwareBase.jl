@@ -31,11 +31,14 @@ Represent `CAR` or cards of an `Input` in VASP, Quantum ESPRESSO, etc.
 abstract type Card <: InputEntry end
 
 """
-    groupname(namelist::Namelist)
+    groupname(x::InputEntry)
 
-Get the group name of a `Namelist`.
+Get the group name of an `InputEntry`.
+
+The definition `groupname(x) = groupname(typeof(x))` is provided for convenience
+so that instances can be passed instead of types.
 """
-function groupname end
+groupname(x::InputEntry) = groupname(typeof(x))
 
 """
     asstring(object::Union{Input,InputEntry}, config::FormatConfig)
