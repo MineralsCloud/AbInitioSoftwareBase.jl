@@ -2,7 +2,9 @@
 
 This page collects some possible errors you may encounter and trick how to fix them.
 
-*If you have additional tips, please submit a PR with suggestions.*
+*If you have additional tips, please
+[submit a PR](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/compare) or
+[open an issue](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/issues/new/choose).*
 
 ## Installation problems
 
