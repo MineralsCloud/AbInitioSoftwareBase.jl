@@ -1,3 +1,5 @@
+using AbInitioSoftwareBase: parentdir, extension
+
 @testset "`load` and `save`" begin
     dict = Dict(
         "a" => 1,
@@ -42,4 +44,14 @@
         @test_throws MethodError save("x.jon", dict)
         @test_throws MethodError save("x.Tml", dict)
     end
+end
+
+@testset "Test `parentdir`" begin
+    @test parentdir("test.yaml") == pwd()
+    @test parentdir("./test.yaml") == pwd() * '/'
+end
+
+@testset "Extensions" begin
+    @test extension("a.b_c.d.yaml") == "yaml"
+    @test extension("a.b_c.d.YaMl") == "yaml"
 end
