@@ -18,6 +18,8 @@ Save `data` to `file`.
 
 By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recognized by `file` extension.
 
+If `data` is a `Dict`, its keys should be `String`s so that `load` can return the same `data`.
+
 !!! warning
     Allowed `data` types can be referenced in [`JSON.jl` documentation](https://github.com/JuliaIO/JSON.jl/blob/master/README.md)
     and [`YAML.jl` documentation](https://github.com/JuliaData/YAML.jl/blob/master/README.md).
