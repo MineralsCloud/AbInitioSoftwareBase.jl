@@ -44,6 +44,12 @@ using AbInitioSoftwareBase: parentdir, extension
         @test_throws MethodError save("x.jon", dict)
         @test_throws MethodError save("x.Tml", dict)
     end
+    @testset "Format conversions" begin
+        of_format("testconvert.json", "test.toml")
+        @test load("testconvert.json") == load("test.toml")
+        of_format("testconvert.toml", "test.json")
+        @test load("testconvert.toml") == load("test.json")
+    end
 end
 
 @testset "Test `parentdir`" begin
