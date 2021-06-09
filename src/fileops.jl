@@ -108,13 +108,7 @@ Get the directory of a `file`.
 
 The problem of `dirname` is that it returns an empty string if users do not write `"./"` in the `file` path. This will cause an error in `tempname`.
 """
-function parentdir(file)
-    dir = dirname(expanduser(file))
-    if isempty(dir)
-        dir = pwd()
-    end
-    return abspath(dir)
-end
+parentdir(file) = dirname(abspath(expanduser(file)))
 
 """
     extension(file)
