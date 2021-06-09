@@ -1,7 +1,7 @@
 import JSON
 using IsURL: isurl
 import YAML
-import Pkg.TOML
+import TOML
 
 export load, save, loads, of_format
 
