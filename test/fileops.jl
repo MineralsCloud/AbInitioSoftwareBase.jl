@@ -53,8 +53,7 @@ using AbInitioSoftwareBase: parentdir, extension
 end
 
 @testset "Test `parentdir`" begin
-    @test parentdir("test.yaml") == pwd()
-    @test parentdir("./test.yaml") == pwd() * '/'
+    @test parentdir("test.yaml") == parentdir("./test.yaml") == pwd()
 end
 
 @testset "Extensions" begin
