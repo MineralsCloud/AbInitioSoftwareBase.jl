@@ -10,6 +10,7 @@
 [![coverage report](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/badges/master/coverage.svg)](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/-/jobs)
 [![Coverage](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl)
 [![Coverage](https://coveralls.io/repos/github/MineralsCloud/AbInitioSoftwareBase.jl/badge.svg?branch=master)](https://coveralls.io/github/MineralsCloud/AbInitioSoftwareBase.jl?branch=master)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/organization/repository)
 
 `AbInitioSoftwareBase.jl` is an interface package that defines some common API
 shared by some packages that represent different *ab initio* software like
