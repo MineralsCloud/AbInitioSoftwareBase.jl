@@ -40,11 +40,12 @@ so that instances can be passed instead of types.
 """
 groupname(x::InputEntry) = groupname(typeof(x))
 
-Base.Dict(nml::Namelist) =
-    Dict(name => getproperty(nml, name) for name in propertynames(nml))
-Base.NamedTuple(nml::Namelist) =
-    NamedTuple{propertynames(nml)}(getproperty(nml, name) for name in propertynames(nml))
-Base.setdiff(a::T, b::T) where {T<:Namelist} = setdiff(Dict(a), Dict(b))
+Base.iterate(nml::Namelist) = (fieldname(typeof(nml), 1) => getfield(nml, 1), 2)
+Base.iterate(nml::Namelist, i) =
+    i < 1 || i > nfields(nml) ? nothing :
+    (fieldname(typeof(nml), i) => getfield(nml, i), i + 1)
+
+Base.length(nml::Namelist) = nfields(nml)
 
 """
     asstring(object::Union{Input,InputEntry}, config::FormatConfig)
