@@ -22,6 +22,12 @@ Represent an `mpiexec` executable.
     options::Dict{String,Any} = Dict()
 end
 
+"""
+    mpiexec(config::MpiexecConfig)
+    mpiexec(; kwargs...)
+
+Construct an `mpiexec` from `kwargs` or an `MpiexecConfig`.
+"""
 function mpiexec(config::MpiexecConfig)
     args = [MPICH_jll.mpiexec_path, "-n", string(config.np)]
     for (k, v) in config.options
