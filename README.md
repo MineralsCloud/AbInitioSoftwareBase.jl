@@ -27,6 +27,7 @@ with some continuous integration services to test its validity.
   - [`Configurations.jl`](https://github.com/Roger-luo/Configurations.jl) `v0.3.0` and above
   - [`IsURL.jl`](https://github.com/zlatanvasovic/IsURL.jl) `v0.2.0` and above
   - [`JSON.jl`](https://github.com/JuliaIO/JSON.jl) `v0.20.0` and above
+  - [`MPICH_jll.jl`](https://github.com/JuliaBinaryWrappers/MPICH_jll.jl) `v3.3` and above
   - [`TOML.jl`](https://github.com/JuliaLang/TOML.jl) `v1.0` and above
   - [`YAML.jl`](https://github.com/JuliaData/YAML.jl) `v0.3.0` and above
 - OS: macOS, Linux, Windows, and FreeBSD
