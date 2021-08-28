@@ -3,7 +3,7 @@ module Commands
 using Configurations: from_kwargs, @option
 import MPICH_jll
 
-export MpiexecConfig
+export MpiexecConfig, mpiexec
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
