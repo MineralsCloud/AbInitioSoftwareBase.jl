@@ -18,8 +18,7 @@ Represent an `mpiexec` executable.
 - `options::Dict{String,Any}=Dict()`: the options of `mpiexec`. See ["mpiexec(1) man page"](https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php).
 """
 @option struct MpiexecConfig <: CommandConfig
-    exe::String = "mpiexec"
-    np::UInt = 0
+    np::UInt = 1
     options::Dict{String,Any} = Dict()
 end
 
