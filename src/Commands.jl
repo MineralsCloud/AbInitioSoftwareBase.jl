@@ -32,7 +32,7 @@ function mpiexec(config::MpiexecConfig)
         append!(args, main)
         cmd = Cmd(args)
         if isempty(env)
-            return Cmd(cmd; env = MPICH_jll.mpiexec().env; kwargs...)
+            return Cmd(cmd; env = MPICH_jll.mpiexec().env, kwargs...)
         else
             return Cmd(cmd; env = env, kwargs...)
         end
