@@ -5,25 +5,30 @@ CurrentModule = AbInitioSoftwareBase
 # AbInitioSoftwareBase
 
 `AbInitioSoftwareBase.jl` is an interface package that defines some common API
-shared by some packages that represent different *ab initio* software like
-[Quantum ESPRESSO](https://www.quantum-espresso.org/), [VASP](https://www.vasp.at/), etc.
-The API will be extended in
-[`QuantumESPRESSOBase.jl`](https://github.com/MineralsCloud/QuantumESPRESSOBase.jl), etc.
+shared by some packages that represent different _ab initio_ software like
+[Quantum ESPRESSO](https://www.quantum-espresso.org/),
+[VASP](https://www.vasp.at/), etc. The API will be extended in
+[`QuantumESPRESSOBase.jl`](https://github.com/MineralsCloud/QuantumESPRESSOBase.jl),
+etc.
 
-The code is [hosted on GitHub](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl),
+The code is
+[hosted on GitHub](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl),
 with some continuous integration services to test its validity.
 
-This repository is created and maintained by [singularitti](https://github.com/singularitti).
-You are very welcome to contribute.
+This repository is created and maintained by
+[singularitti](https://github.com/singularitti). You are very welcome to
+contribute.
 
 ## Compatibility
 
 - [Julia version: `v1.0.0` to `v1.6.1`](https://julialang.org/downloads/)
 - Dependencies:
-  - [`Configurations.jl`](https://github.com/Roger-luo/Configurations.jl) `v0.3.0` and above
+  - [`Configurations.jl`](https://github.com/Roger-luo/Configurations.jl)
+    `v0.3.0` and above
   - [`IsURL.jl`](https://github.com/zlatanvasovic/IsURL.jl) `v0.2.0` and above
   - [`JSON.jl`](https://github.com/JuliaIO/JSON.jl) `v0.20.0` and above
-  - [`MPICH_jll.jl`](https://github.com/JuliaBinaryWrappers/MPICH_jll.jl) `v3.3` and above
+  - [`MPICH_jll.jl`](https://github.com/JuliaBinaryWrappers/MPICH_jll.jl) `v3.3`
+    and above
   - [`TOML.jl`](https://github.com/JuliaLang/TOML.jl) `v1.0` and above
   - [`YAML.jl`](https://github.com/JuliaData/YAML.jl) `v0.3.0` and above
 - OS: macOS, Linux, Windows, and FreeBSD
@@ -44,4 +49,5 @@ Depth = 3
 ### [Index](@id main-index)
 
 ```@index
+
 ```
