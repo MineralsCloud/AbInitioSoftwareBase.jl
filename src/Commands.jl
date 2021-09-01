@@ -1,5 +1,6 @@
 module Commands
 
+using Compat: addenv
 using Configurations: from_kwargs, @option
 import MPICH_jll
 
