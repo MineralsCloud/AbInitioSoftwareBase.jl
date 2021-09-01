@@ -10,13 +10,16 @@ export MpiexecOptions, MpiexecConfig, mpiexec
 abstract type CommandConfig end
 
 """
-    MpiexecConfig(; np=1, options=Dict())
+    MpiexecOptions(; <keyword arguments>)
 
-Represent an `mpiexec` executable.
+Represent the options of command `mpiexec`.
 
 # Arguments
+- `f::String=""`: file containing the host names.
+- `hosts::Vector{String}`: comma separated host list.
+- `wdir::String`: working directory to use.
+- `configfile::String`: config file containing MPMD launch options.
 - `np::UInt=1`: the number of processes used.
-- `options::Dict{String,Any}=Dict()`: the options of `mpiexec`. See ["mpiexec(1) man page"](https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php).
 """
 @option struct MpiexecOptions <: CommandConfig
     f::String = ""
@@ -29,10 +32,10 @@ end
 const MpiexecConfig = MpiexecOptions
 
 """
-    mpiexec(config::MpiexecConfig)
+    mpiexec(config::MpiexecOptions)
     mpiexec(; kwargs...)
 
-Construct an `mpiexec` from `kwargs` or an `MpiexecConfig`.
+Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
 """
 function mpiexec(config::MpiexecOptions)
     args = [MPICH_jll.mpiexec_path]
