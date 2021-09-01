@@ -32,10 +32,10 @@ end
 const MpiexecConfig = MpiexecOptions
 
 """
-    mpiexec(config::MpiexecConfig)
+    mpiexec(config::MpiexecOptions)
     mpiexec(; kwargs...)
 
-Construct an `mpiexec` from `kwargs` or an `MpiexecConfig`.
+Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
 """
 function mpiexec(config::MpiexecOptions)
     args = [MPICH_jll.mpiexec_path]
