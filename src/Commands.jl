@@ -4,7 +4,7 @@ using Compat: addenv
 using Configurations: from_kwargs, @option
 import MPICH_jll
 
-export MpiexecConfig, mpiexec
+export MpiexecOptions, mpiexec
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
@@ -18,7 +18,7 @@ Represent an `mpiexec` executable.
 - `np::UInt=1`: the number of processes used.
 - `options::Dict{String,Any}=Dict()`: the options of `mpiexec`. See ["mpiexec(1) man page"](https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php).
 """
-@option struct MpiexecConfig <: CommandConfig
+@option struct MpiexecOptions <: CommandConfig
     f::String = ""
     hosts::Vector{String} = String[]
     wdir::String = ""
@@ -32,7 +32,7 @@ end
 
 Construct an `mpiexec` from `kwargs` or an `MpiexecConfig`.
 """
-function mpiexec(config::MpiexecConfig)
+function mpiexec(config::MpiexecOptions)
     args = [MPICH_jll.mpiexec_path]
     for field in (:f, :hosts, :wdir, :configfile)
         if !isempty(getfield(config, field))
@@ -46,6 +46,6 @@ function mpiexec(config::MpiexecConfig)
         return addenv(cmd, MPICH_jll.mpiexec().env)
     end
 end
-mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecConfig; kwargs...))
+mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecOptions; kwargs...))
 
 end
