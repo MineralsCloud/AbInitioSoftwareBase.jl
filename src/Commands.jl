@@ -10,7 +10,7 @@ export MpiexecOptions, MpiexecConfig, mpiexec
 abstract type CommandConfig end
 
 """
-    MpiexecOptions(; np=1, kwargs...)
+    MpiexecOptions(; <keyword arguments>)
 
 Represent the options of command `mpiexec`.
 
