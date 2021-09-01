@@ -1,9 +1,10 @@
 module Commands
 
+using Compat: addenv
 using Configurations: from_kwargs, @option
 import MPICH_jll
 
-export MpiexecConfig, mpiexec
+export MpiexecOptions, MpiexecConfig, mpiexec
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
@@ -17,10 +18,15 @@ Represent an `mpiexec` executable.
 - `np::UInt=1`: the number of processes used.
 - `options::Dict{String,Any}=Dict()`: the options of `mpiexec`. See ["mpiexec(1) man page"](https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php).
 """
-@option struct MpiexecConfig <: CommandConfig
+@option struct MpiexecOptions <: CommandConfig
+    f::String = ""
+    hosts::Vector{String} = String[]
+    wdir::String = ""
+    configfile::String = ""
     np::UInt = 1
-    options::Dict{String,Any} = Dict()
 end
+
+const MpiexecConfig = MpiexecOptions
 
 """
     mpiexec(config::MpiexecConfig)
@@ -28,21 +34,20 @@ end
 
 Construct an `mpiexec` from `kwargs` or an `MpiexecConfig`.
 """
-function mpiexec(config::MpiexecConfig)
-    args = [MPICH_jll.mpiexec_path, "-n", string(config.np)]
-    for (k, v) in config.options
-        push!(args, k, string(v))
-    end
-    return function (main::AbstractVector; env = String[], kwargs...)
-        append!(args, main)
-        cmd = Cmd(args)
-        if isempty(env)
-            return Cmd(cmd; env = MPICH_jll.mpiexec().env, kwargs...)
-        else
-            return Cmd(cmd; env = env, kwargs...)
+function mpiexec(config::MpiexecOptions)
+    args = [MPICH_jll.mpiexec_path]
+    for field in (:f, :hosts, :wdir, :configfile)
+        if !isempty(getfield(config, field))
+            push!(args, '-', string(field), getfield(config, field))
         end
     end
+    push!(args, "-np", string(config.np))
+    return function (exec; kwargs...)
+        append!(args, exec)
+        cmd = Cmd(args; kwargs...)
+        return addenv(cmd, MPICH_jll.mpiexec().env)
+    end
 end
-mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecConfig; kwargs...))
+mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecOptions; kwargs...))
 
 end
