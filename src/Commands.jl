@@ -39,10 +39,13 @@ Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
 """
 function mpiexec(config::MpiexecOptions)
     args = [MPICH_jll.mpiexec_path]
-    for field in (:f, :hosts, :wdir, :configfile)
+    for field in (:f, :wdir, :configfile)
         if !isempty(getfield(config, field))
-            push!(args, '-', string(field), getfield(config, field))
+            push!(args, "-$field", getfield(config, field))
         end
+    end
+    if !isempty(getfield(config, :hosts))
+        push!(args, "-hosts", join(getfield(config, :hosts), ','))
     end
     push!(args, "-np", string(config.np))
     return function (exec; kwargs...)
