@@ -4,7 +4,7 @@ using Compat: addenv
 using Configurations: from_kwargs, @option
 import MPICH_jll
 
-export MpiexecOptions, mpiexec
+export MpiexecOptions, MpiexecConfig, mpiexec
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
@@ -25,6 +25,8 @@ Represent an `mpiexec` executable.
     configfile::String = ""
     np::UInt = 1
 end
+
+const MpiexecConfig = MpiexecOptions
 
 """
     mpiexec(config::MpiexecConfig)
