@@ -50,7 +50,7 @@ function mpiexec(config::MpiexecOptions)
     push!(args, "-np", string(config.np))
     return function (exec; kwargs...)
         append!(args, exec)
-        cmd = Cmd(args; kwargs...)
+        cmd = Cmd(Cmd(args); kwargs...)
         return addenv(cmd, MPICH_jll.mpiexec().env)
     end
 end
