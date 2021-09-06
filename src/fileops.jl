@@ -66,7 +66,7 @@ function _load(path, ::DataFormat{:TOML})
 end
 function _load(path, ::DataFormat{:YAML})
     open(path, "r") do io
-        YAML.load(io)
+        YAML.load(io; dicttype = Dict{String,Any})  # To keep up with JSON & TOML results
     end
 end
 
