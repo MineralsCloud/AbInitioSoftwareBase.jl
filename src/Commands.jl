@@ -22,10 +22,12 @@ Represent the options of command `mpiexec`.
 - `np::UInt=1`: the number of processes used.
 """
 @option struct MpiexecOptions <: CommandConfig
+    path::String = "mpiexec"
     f::String = ""
     hosts::Vector{String} = String[]
     wdir::String = ""
     configfile::String = ""
+    env::Union{Dict,Vector} = Dict(ENV)
     np::UInt = 1
 end
 
