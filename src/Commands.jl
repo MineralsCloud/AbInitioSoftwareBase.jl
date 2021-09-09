@@ -2,7 +2,6 @@ module Commands
 
 using Compat: addenv
 using Configurations: from_kwargs, @option
-import MPICH_jll
 
 export MpiexecOptions, MpiexecConfig, mpiexec
 
@@ -22,10 +21,12 @@ Represent the options of command `mpiexec`.
 - `np::UInt=1`: the number of processes used.
 """
 @option struct MpiexecOptions <: CommandConfig
+    path::String = "mpiexec"
     f::String = ""
     hosts::Vector{String} = String[]
     wdir::String = ""
     configfile::String = ""
+    env::Union{Dict,Vector} = Dict(ENV)
     np::UInt = 1
 end
 
@@ -38,7 +39,7 @@ const MpiexecConfig = MpiexecOptions
 Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
 """
 function mpiexec(config::MpiexecOptions)
-    args = [MPICH_jll.mpiexec_path]
+    args = [config.path]
     for field in (:f, :wdir, :configfile)
         if !isempty(getfield(config, field))
             push!(args, "-$field", getfield(config, field))
@@ -51,7 +52,7 @@ function mpiexec(config::MpiexecOptions)
     return function (exec; kwargs...)
         append!(args, exec)
         cmd = Cmd(Cmd(args); kwargs...)
-        return addenv(cmd, MPICH_jll.mpiexec().env)
+        return addenv(cmd, config.env)
     end
 end
 mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecOptions; kwargs...))

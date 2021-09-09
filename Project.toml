@@ -4,7 +4,6 @@ authors = ["Qi Zhang <singularitti@outlook.com>"]
 version = "0.5.3-DEV"
 
 [deps]
-MPICH_jll = "7cb0a576-ebde-5e09-9194-50597f1243b4"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
@@ -16,7 +15,6 @@ IsURL = "ceb4388c-583f-448d-bb30-00b11e8c5682"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
-MPICH_jll = "3"
 JSON = "0.20, 0.21"
 julia = "1"
 Compat = "3.16"
