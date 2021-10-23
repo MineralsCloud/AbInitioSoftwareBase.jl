@@ -6,7 +6,7 @@ using Configurations: from_kwargs, @option
     using Preferences: @load_preference
 end
 
-export MpiexecOptions, MpiexecConfig, mpiexec
+export mpiexec
 
 @static if VERSION >= v"1.6"
     const mpiexec_path = @load_preference("mpiexec path", "mpiexec")
@@ -16,29 +16,6 @@ end
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
-
-"""
-    MpiexecOptions(; <keyword arguments>)
-
-Represent the options of command `mpiexec`.
-
-# Arguments
-- `f::String=""`: file containing the host names.
-- `hosts::Vector{String}`: comma separated host list.
-- `wdir::String`: working directory to use.
-- `configfile::String`: config file containing MPMD launch options.
-- `np::UInt=1`: the number of processes used.
-"""
-@option struct MpiexecOptions <: CommandConfig
-    f::String = ""
-    hosts::Vector{String} = String[]
-    wdir::String = ""
-    configfile::String = ""
-    env::Union{Dict,Vector} = Dict(ENV)
-    np::UInt = 1
-end
-
-const MpiexecConfig = MpiexecOptions
 
 """
     mpiexec(config::MpiexecOptions)
