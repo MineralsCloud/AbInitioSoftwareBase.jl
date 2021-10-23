@@ -2,8 +2,17 @@ module Commands
 
 using Compat: addenv
 using Configurations: from_kwargs, @option
+@static if VERSION >= v"1.6"
+    using Preferences: @load_preference
+end
 
 export MpiexecOptions, MpiexecConfig, mpiexec
+
+@static if VERSION >= v"1.6"
+    const mpiexec_path = @load_preference("mpiexec path", "mpiexec")
+else
+    const mpiexec_path = "mpiexec"
+end
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
@@ -21,7 +30,6 @@ Represent the options of command `mpiexec`.
 - `np::UInt=1`: the number of processes used.
 """
 @option struct MpiexecOptions <: CommandConfig
-    path::String = "mpiexec"
     f::String = ""
     hosts::Vector{String} = String[]
     wdir::String = ""
@@ -39,7 +47,7 @@ const MpiexecConfig = MpiexecOptions
 Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
 """
 function mpiexec(config::MpiexecOptions)
-    args = [config.path]
+    args = [mpiexec_path]
     for field in (:f, :wdir, :configfile)
         if !isempty(getfield(config, field))
             push!(args, "-$field", getfield(config, field))
