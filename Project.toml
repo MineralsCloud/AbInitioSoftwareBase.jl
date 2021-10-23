@@ -10,6 +10,7 @@ YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 Configurations = "5218b696-f38b-4ac9-8b61-a12ec717816d"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 IsURL = "ceb4388c-583f-448d-bb30-00b11e8c5682"
+Preferences = "21216c6a-2e73-6563-6e65-726566657250"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
