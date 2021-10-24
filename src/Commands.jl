@@ -134,28 +134,38 @@ const LONG_OPTIONS = (
 )
 
 """
-    mpiexec(config::MpiexecOptions)
-    mpiexec(; kwargs...)
+    mpiexec(env = Pair{String,String}[]; kwargs...)
 
-Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
+Generate a function from `kwargs` and `env`.
 """
-function mpiexec(config::MpiexecOptions)
+function mpiexec(env = Pair{String,String}[]; kwargs...)
     args = [mpiexec_path]
-    for field in (:f, :wdir, :configfile)
-        if !isempty(getfield(config, field))
-            push!(args, "-$field", getfield(config, field))
-        end
+    for (arg, val) in kwargs
+        _pusharg!(args, string(arg), val)
     end
-    if !isempty(getfield(config, :hosts))
-        push!(args, "-hosts", join(getfield(config, :hosts), ','))
-    end
-    push!(args, "-np", string(config.np))
-    return function (exec; kwargs...)
+    return function (exec)
         append!(args, exec)
-        cmd = Cmd(Cmd(args); kwargs...)
-        return addenv(cmd, config.env)
+        cmd = Cmd(args)
+        return addenv(addenv(cmd), env...)
     end
 end
-mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecOptions; kwargs...))
+
+function _pusharg!(args, arg, val)
+    arg = replace(arg, '_' => '-')
+    option = (arg in LONG_OPTIONS ? "--" : '-') * arg
+    val = if val isa AbstractVector{<:AbstractString}
+        join(val, ',')
+    elseif val isa Pair
+        join(val, ' ')
+    elseif val isa AbstractVector{<:Pair} || val isa AbstractDict
+        for v in val
+            push!(args, option, join(v, ' '))
+        end
+        return args
+    else
+        string(val)
+    end
+    return push!(args, option, val)
+end
 
 end
