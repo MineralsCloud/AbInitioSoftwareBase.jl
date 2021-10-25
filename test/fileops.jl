@@ -9,21 +9,14 @@ using AbInitioSoftwareBase: parentdir, extension
         "5.0" => "Hello",
     )
     @testset "Save to YAML" begin
-        bench = Dict(
-            5.0 => "Hello",
-            4 => true,
-            "c" => Any[1, 2, "3", "4.0"],
-            "b" => 10000.0,
-            "a" => 1,
-        )
         file = "test.yaml"
         save(file, dict)
-        @test load(file) == bench
+        @test load(file) == dict
         file = "test.yml"
         save(file, dict)
-        @test load(file) == bench
+        @test load(file) == dict
         save("mixed.YaMl", dict)
-        @test load("mixed.YaMl") == bench
+        @test load("mixed.YaMl") == dict
     end
     @testset "Save to JSON" begin
         file = "test.json"
