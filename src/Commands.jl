@@ -1,7 +1,6 @@
 module Commands
 
 using Compat: addenv
-using Configurations: from_kwargs, @option
 @static if VERSION >= v"1.6"
     using Preferences: @load_preference
 end
