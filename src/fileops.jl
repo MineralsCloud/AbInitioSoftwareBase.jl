@@ -56,17 +56,18 @@ By now, `YAML`, `JSON`, and `TOML` formats are supported. The format is recogniz
 function load(url_or_file)
     path = filepath(url_or_file)
     ext = extension(path)
-    _load(path, format(Val(Symbol(ext))))
+    return _load(path, format(Val(Symbol(ext))))
 end
 _load(path, ::DataFormat{:JSON}) = JSON.parsefile(path)
 function _load(path, ::DataFormat{:TOML})
     open(path, "r") do io
-        TOML.parse(io)
+        return TOML.parse(io)
     end
 end
 function _load(path, ::DataFormat{:YAML})
     open(path, "r") do io
-        YAML.load(io; dicttype = Dict{String,Any})  # To keep up with JSON & TOML results
+        dict = YAML.load(io)
+        return Dict(string(key) => value for (key, value) in dict)  # To keep up with JSON & TOML results
     end
 end
 
