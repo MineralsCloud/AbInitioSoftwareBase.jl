@@ -1,7 +1,7 @@
 name = "AbInitioSoftwareBase"
 uuid = "df5135bc-470e-46c6-b451-292e27ca5b84"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
-version = "0.6.1-DEV"
+version = "0.7.0"
 
 [deps]
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
@@ -9,8 +9,8 @@ Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 Configurations = "5218b696-f38b-4ac9-8b61-a12ec717816d"
 TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-IsURL = "ceb4388c-583f-448d-bb30-00b11e8c5682"
 Preferences = "21216c6a-2e73-6563-6e65-726566657250"
+IsURL = "ceb4388c-583f-448d-bb30-00b11e8c5682"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
@@ -22,8 +22,8 @@ Compat = "3.16"
 YAML = "0.3, 0.4"
 Configurations = "0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16"
 TOML = "1"
-IsURL = "0.2"
 Preferences = "1"
+IsURL = "0.2"
 
 [targets]
 test = ["Test"]
