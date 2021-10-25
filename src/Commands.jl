@@ -164,6 +164,8 @@ function _pusharg!(args, arg, val)
     if val isa AbstractVector{<:AbstractString}
         join(val, ',')
         return push!(args, option, val)
+    elseif val isa Bool  # flag
+        return push!(args, option)
     elseif val isa Pair
         return push!(args, option, string(val.first), string(val.second))
     elseif val isa AbstractVector{<:Pair} || val isa AbstractDict
