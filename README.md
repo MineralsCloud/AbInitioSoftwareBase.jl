@@ -9,7 +9,7 @@
 [![pipeline status](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/badges/master/pipeline.svg)](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/-/pipelines)
 [![coverage report](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/badges/master/coverage.svg)](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/-/jobs)
 [![Coverage](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl)
-[![Coverage](https://coveralls.io/repos/github/MineralsCloud/AbInitioSoftwareBase.jl/badge.svg?branch=master)](https://coveralls.io/github/MineralsCloud/AbInitioSoftwareBase.jl?branch=master)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/organization/repository)
 
 `AbInitioSoftwareBase.jl` is an interface package that defines some common API
 shared by some packages that represent different *ab initio* software like
@@ -27,8 +27,10 @@ with some continuous integration services to test its validity.
   - [`Configurations.jl`](https://github.com/Roger-luo/Configurations.jl) `v0.3.0` and above
   - [`IsURL.jl`](https://github.com/zlatanvasovic/IsURL.jl) `v0.2.0` and above
   - [`JSON.jl`](https://github.com/JuliaIO/JSON.jl) `v0.20.0` and above
+  - [`MPICH_jll.jl`](https://github.com/JuliaBinaryWrappers/MPICH_jll.jl) `v3.3` and above
   - [`TOML.jl`](https://github.com/JuliaLang/TOML.jl) `v1.0` and above
   - [`YAML.jl`](https://github.com/JuliaData/YAML.jl) `v0.3.0` and above
+  - [`Preferences.jl`](https://github.com/JuliaPackaging/Preferences.jl) `v1.0.0` and above
 - OS: macOS, Linux, Windows, and FreeBSD
 - Architecture: x86, x64, ARM
 
