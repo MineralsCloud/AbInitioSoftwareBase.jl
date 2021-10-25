@@ -14,6 +14,7 @@ using AbInitioSoftwareBase.Commands
         "16",
         "--map-by",
         "core",
+        "--use-regexp",
         "--mca",
         "btl_openib_if_include",
         "mlx5_2:1",
