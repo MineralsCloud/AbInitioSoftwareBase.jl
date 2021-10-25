@@ -8,13 +8,13 @@ end
 export mpiexec
 
 @static if VERSION >= v"1.6"
-    const mpiexec_path = @load_preference("mpiexec path", "mpiexec")
+    get_path() = @load_preference("mpiexec path", "mpiexec")
     function set_path(path::String)
         @assert ispath(path)
         @set_preferences!("mpiexec path" => path)
     end
 else
-    const mpiexec_path = "mpiexec"
+    get_path() = "mpiexec"
 end
 
 "Represent the configurations of a command."
@@ -147,7 +147,7 @@ const LONG_OPTIONS = (
 Generate a function from `kwargs` and `env`.
 """
 function mpiexec(env = Pair{String,String}[]; kwargs...)
-    args = [mpiexec_path]
+    args = [get_path()]
     for (arg, val) in kwargs
         if arg in (:env, :genv, :envlist, :genvlist)
             throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
