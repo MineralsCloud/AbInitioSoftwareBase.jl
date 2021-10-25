@@ -17,7 +17,7 @@ end
 "Represent the configurations of a command."
 abstract type CommandConfig end
 
-# See https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php
+# See https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php & https://www.mpich.org/static/docs/v3.1/www1/mpiexec.html
 const SHORT_OPTIONS = (
     # Open MPI options
     :h,
@@ -38,6 +38,8 @@ const SHORT_OPTIONS = (
     :cf,
     :d,
     # MPICH options
+    :f,
+    :l,
 )
 const LONG_OPTIONS = (
     # Open MPI options
@@ -131,6 +133,9 @@ const LONG_OPTIONS = (
     :report_state_on_timeout,
     # MPICH options
     :arch,
+    :file,
+    :soft,
+    :configfile,
 )
 
 """
