@@ -146,6 +146,9 @@ Generate a function from `kwargs` and `env`.
 function mpiexec(env = Pair{String,String}[]; kwargs...)
     args = [mpiexec_path]
     for (arg, val) in kwargs
+        if arg in (:env, :genv, :envlist, :genvlist)
+            throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
+        end
         _pusharg!(args, string(arg), val)
     end
     return function (exec)
