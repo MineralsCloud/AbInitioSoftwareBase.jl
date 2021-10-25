@@ -151,7 +151,7 @@ function mpiexec(env = Pair{String,String}[]; kwargs...)
     return function (exec)
         append!(args, exec)
         cmd = Cmd(args)
-        return addenv(addenv(cmd), env...)
+        return addenv(cmd, env...)
     end
 end
 
