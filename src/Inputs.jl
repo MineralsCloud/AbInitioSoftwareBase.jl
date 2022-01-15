@@ -1,6 +1,6 @@
 module Inputs
 
-export groupname, writetxt, asstring
+export groupname, writetxt, asstring, getpseudodir, getpotentials
 
 """
     Input
@@ -76,5 +76,9 @@ end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles
 include("format.jl")
 
 abstract type Setter end
+
+function getpseudodir end
+
+function getpotentials end
 
 end
