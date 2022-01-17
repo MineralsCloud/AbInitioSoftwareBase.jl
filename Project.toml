@@ -1,7 +1,7 @@
 name = "AbInitioSoftwareBase"
 uuid = "df5135bc-470e-46c6-b451-292e27ca5b84"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
-version = "0.6.1"
+version = "0.6.2"
 
 [deps]
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
