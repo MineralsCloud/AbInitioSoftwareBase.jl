@@ -7,6 +7,7 @@ using AbInitioSoftwareBase: parentdir, extension
         "c" => [1, 2, "3", "4.0"],
         "4" => true,
         "5.0" => "Hello",
+        "dict" => Dict("4" => 1, "as" => 2),
     )
     @testset "Save to YAML" begin
         file = "test.yaml"
