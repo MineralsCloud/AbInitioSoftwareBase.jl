@@ -67,7 +67,7 @@ end
 function _load(path, ::DataFormat{:YAML})
     open(path, "r") do io
         dict = YAML.load(io)
-        return Dict(string(key) => value for (key, value) in dict)  # To keep up with JSON & TOML results
+        return JSON.parse(JSON.json(dict))  # To keep up with JSON & TOML results
     end
 end
 
