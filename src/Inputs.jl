@@ -1,6 +1,6 @@
 module Inputs
 
-export groupname, writetxt, asstring, getpseudodir, getpotentials
+export groupname, writetxt, getpseudodir, getpotentials
 
 """
     Input
@@ -48,23 +48,13 @@ Base.iterate(nml::Namelist, i) =
 Base.length(nml::Namelist) = nfields(nml)
 
 """
-    asstring(object::Union{Input,InputEntry}, config::FormatConfig)
-    asstring(object::Union{Input,InputEntry}; kwargs...)
-
-Return a string representing a qualified `Input` or part of an `Input`, with formatting arguments `FormatConfig` or `kwargs`.
-
-See also: [`FormatConfig`](@ref)
-"""
-function asstring end
-
-"""
     writeinput(io::IO, input::Input)
     writeinput(file, input::Input)
 
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
 function writetxt(io::IO, input::Input)
-    write(io, asstring(input))
+    write(io, string(input))
     return
 end
 function writetxt(file, input::Input)
