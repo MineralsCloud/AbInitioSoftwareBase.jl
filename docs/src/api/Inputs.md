@@ -12,7 +12,6 @@ InputEntry
 Namelist
 Card
 groupname
-asstring
 writetxt
 FormatConfig
 ```
