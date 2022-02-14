@@ -53,10 +53,6 @@ Base.length(nml::Namelist) = nfields(nml)
 
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
-function writetxt(io::IO, input::Input)
-    write(io, string(input))
-    return
-end
 function writetxt(file, input::Input)
     open(file, "w") do io
         writetxt(io, input)
