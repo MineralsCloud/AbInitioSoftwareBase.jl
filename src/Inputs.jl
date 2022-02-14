@@ -48,10 +48,9 @@ Base.iterate(nml::Namelist, i) =
 Base.length(nml::Namelist) = nfields(nml)
 
 """
-    writeinput(io::IO, input::Input)
-    writeinput(file, input::Input)
+    writetxt(filename::AbstractString, input::Input)
 
-Write an `Input` object to `file` or `io` using corresponding string format.
+Write an `Input` object to a file in plain-text format.
 """
 function writetxt(filename, input::Input)
     open(filename, "w") do io
