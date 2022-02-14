@@ -53,8 +53,8 @@ Base.length(nml::Namelist) = nfields(nml)
 
 Write an `Input` object to `file` or `io` using corresponding string format.
 """
-function writetxt(file, input::Input)
-    open(file, "w") do io
+function writetxt(filename, input::Input)
+    open(filename, "w") do io
         print(io, input)
     end
 end  # See https://github.com/JuliaLang/julia/blob/0f4c8b0/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L788-L792
