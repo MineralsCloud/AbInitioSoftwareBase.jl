@@ -55,9 +55,9 @@ Write an `Input` object to `file` or `io` using corresponding string format.
 """
 function writetxt(file, input::Input)
     open(file, "w") do io
-        writetxt(io, input)
+        print(io, input)
     end
-end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
+end  # See https://github.com/JuliaLang/julia/blob/0f4c8b0/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L788-L792
 
 include("format.jl")
 
