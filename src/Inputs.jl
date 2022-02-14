@@ -48,20 +48,15 @@ Base.iterate(nml::Namelist, i) =
 Base.length(nml::Namelist) = nfields(nml)
 
 """
-    writeinput(io::IO, input::Input)
-    writeinput(file, input::Input)
+    writetxt(filename::AbstractString, input::Input)
 
-Write an `Input` object to `file` or `io` using corresponding string format.
+Write an `Input` object to a file in plain-text format.
 """
-function writetxt(io::IO, input::Input)
-    write(io, string(input))
-    return
-end
-function writetxt(file, input::Input)
-    open(file, "w") do io
-        writetxt(io, input)
+function writetxt(filename, input::Input)
+    open(filename, "w") do io
+        print(io, input)
     end
-end  # See https://github.com/JuliaLang/julia/blob/3608c84/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L787-L791
+end  # See https://github.com/JuliaLang/julia/blob/0f4c8b0/stdlib/DelimitedFiles/src/DelimitedFiles.jl#L788-L792
 
 include("format.jl")
 
