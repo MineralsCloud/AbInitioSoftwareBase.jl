@@ -20,7 +20,7 @@ with some continuous integration services to test its validity.
 
 ## Compatibility
 
-- [Julia version: `v1.0.0` to `v1.7.2`](https://julialang.org/downloads/)
+- [Julia version: `v1.0.0` to `v1.7.3`](https://julialang.org/downloads/)
 - Dependencies:
   - [`Compat.jl`](https://github.com/JuliaLang/Compat.jl) `v3.16.0` and above
   - [`Configurations.jl`](https://github.com/Roger-luo/Configurations.jl) `v0.3.0` and above
