@@ -5,5 +5,4 @@ using Test
     # Write your tests here.
     include("fileops.jl")
     include("format.jl")
-    include("Commands.jl")
 end
