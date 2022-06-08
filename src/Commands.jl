@@ -1,60 +1,183 @@
 module Commands
 
 using Compat: addenv
-using Configurations: from_kwargs, @option
+@static if VERSION >= v"1.6"
+    using Preferences: @load_preference, @set_preferences!
+end
 
-export MpiexecOptions, MpiexecConfig, mpiexec
+export mpiexec
+
+@static if VERSION >= v"1.6"
+    get_path() = @load_preference("mpiexec path", "mpiexec")
+    function set_path(path::String)
+        @assert ispath(path)
+        @set_preferences!("mpiexec path" => path)
+    end
+else
+    get_path() = "mpiexec"
+end
 
 "Represent the configurations of a command."
 abstract type CommandConfig end
 
+# See https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php & https://www.mpich.org/static/docs/v3.1/www1/mpiexec.html
+const SHORT_OPTIONS = (
+    # Open MPI options
+    "h",
+    "q",
+    "v",
+    "v",
+    "n",
+    "h",
+    "c",
+    "n",
+    "np",
+    "rf",
+    "s",
+    "wd",
+    "wdir",
+    "x",
+    "am",
+    "cf",
+    "d",
+    # MPICH options
+    "f",
+    "l",
+)
+const LONG_OPTIONS = (
+    # Open MPI options
+    "help",
+    "quiet",
+    "verbose",
+    "version",
+    "display-map",
+    "display-allocation",
+    "output-proctable",
+    "dvm",
+    "max-vm-size",
+    "novm",
+    "hnp",
+    "host",
+    "hostfile",
+    "default-hostfile",
+    "machinefile",
+    "cpu-set",
+    "npersocket",
+    "npernode",
+    "pernode",
+    "map-by",
+    "bycore",
+    "byslot",
+    "nolocal",
+    "nooversubscribe",
+    "oversubscribe",
+    "bynode",
+    "cpu-list",
+    "rank-by",
+    "bind-to",
+    "cpus-per-proc",
+    "cpus-per-rank",
+    "bind-to-core",
+    "bind-to-socket",
+    "report-bindings",
+    "rankfile",
+    "output-filename",
+    "stdin",
+    "merge-stderr-to-stdout",
+    "tag-output",
+    "timestamp-output",
+    "xml",
+    "xml-file",
+    "xterm",
+    "path",
+    "prefix",
+    "noprefix",
+    "preload-binary",
+    "preload-files",
+    "set-cwd-to-session-dir",
+    "gmca",
+    "mca",
+    "tune",
+    "debug",
+    "get-stack-traces",
+    "debugger",
+    "timeout",
+    "tv",
+    "allow-run-as-root",
+    "app",
+    "cartofile",
+    "continuous",
+    "disable-recovery",
+    "do-not-launch",
+    "do-not-resolve",
+    "enable-recovery",
+    "index-argv-by-rank",
+    "leave-session-attached",
+    "max-restarts",
+    "ompi-server",
+    "personality",
+    "ppr",
+    "report-child-jobs-separately",
+    "report-events",
+    "report-pid",
+    "report-uri",
+    "show-progress",
+    "terminate",
+    "use-hwthread-cpus",
+    "use-regexp",
+    "debug-devel",
+    "debug-daemons",
+    "debug-daemons-file",
+    "display-devel-allocation",
+    "display-devel-map",
+    "display-diffable-map",
+    "display-topo",
+    "launch-agent",
+    "report-state-on-timeout",
+    # MPICH options
+    "arch",
+    "file",
+    "soft",
+    "configfile",
+)
+
 """
-    MpiexecOptions(; <keyword arguments>)
+    mpiexec(env = Pair{String,String}[]; kwargs...)
 
-Represent the options of command `mpiexec`.
-
-# Arguments
-- `f::String=""`: file containing the host names.
-- `hosts::Vector{String}`: comma separated host list.
-- `wdir::String`: working directory to use.
-- `configfile::String`: config file containing MPMD launch options.
-- `np::UInt=1`: the number of processes used.
+Generate a function from `kwargs` and `env`.
 """
-@option struct MpiexecOptions <: CommandConfig
-    path::String = "mpiexec"
-    f::String = ""
-    hosts::Vector{String} = String[]
-    wdir::String = ""
-    configfile::String = ""
-    env::Union{Dict,Vector} = Dict(ENV)
-    np::UInt = 1
-end
-
-const MpiexecConfig = MpiexecOptions
-
-"""
-    mpiexec(config::MpiexecOptions)
-    mpiexec(; kwargs...)
-
-Construct an `mpiexec` from `kwargs` or an `MpiexecOptions`.
-"""
-function mpiexec(config::MpiexecOptions)
-    args = [config.path]
-    for field in (:f, :wdir, :configfile)
-        if !isempty(getfield(config, field))
-            push!(args, "-$field", getfield(config, field))
+function mpiexec(env = Pair{String,String}[]; kwargs...)
+    args = [get_path()]
+    for (arg, val) in kwargs
+        if arg in (:env, :genv, :envlist, :genvlist)
+            throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
         end
+        _pusharg!(args, string(arg), val)
     end
-    if !isempty(getfield(config, :hosts))
-        push!(args, "-hosts", join(getfield(config, :hosts), ','))
-    end
-    push!(args, "-np", string(config.np))
-    return function (exec; kwargs...)
+    return function (exec)
         append!(args, exec)
-        cmd = Cmd(Cmd(args); kwargs...)
-        return addenv(cmd, config.env)
+        cmd = Cmd(args)
+        return addenv(cmd, env...)
     end
 end
-mpiexec(; kwargs...) = mpiexec(from_kwargs(MpiexecOptions; kwargs...))
+
+function _pusharg!(args, arg, val)
+    arg = replace(arg, '_' => '-')
+    option = (arg in LONG_OPTIONS ? "--" : '-') * arg
+    if val isa AbstractVector{<:AbstractString}
+        join(val, ',')
+        return push!(args, option, val)
+    elseif val isa Bool  # flag
+        return push!(args, option)
+    elseif val isa Pair
+        return push!(args, option, string(val.first), string(val.second))
+    elseif val isa AbstractVector{<:Pair} || val isa AbstractDict
+        for v in val
+            push!(args, option, string(v.first), string(v.second))
+        end
+    else
+        return push!(args, option, string(val))
+    end
+end
 
 end
