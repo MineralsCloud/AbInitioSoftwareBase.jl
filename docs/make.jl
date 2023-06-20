@@ -19,7 +19,6 @@ makedocs(;
         "Troubleshooting" => "troubleshooting.md",
         "API by module" => [
             "`AbInitioSoftwareBase` module" => "api/AbInitioSoftwareBase.md",
-            "`Inputs` module" => "api/Inputs.md",
             "`Commands` module" => "api/Commands.md",
         ],
     ],

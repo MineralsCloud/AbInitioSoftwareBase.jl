@@ -1,7 +1,7 @@
 # `Inputs` module
 
 ```@meta
-CurrentModule = AbInitioSoftwareBase.Inputs
+CurrentModule = AbInitioSoftwareBase
 ```
 
 ## Public interfaces
