@@ -1,7 +1,7 @@
 name = "AbInitioSoftwareBase"
 uuid = "df5135bc-470e-46c6-b451-292e27ca5b84"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
-version = "0.9.1"
+version = "0.9.2"
 
 [deps]
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
