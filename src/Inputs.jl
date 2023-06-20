@@ -1,5 +1,3 @@
-module Inputs
-
 export groupname, writetxt, getpseudodir, listpotentials
 
 """
@@ -65,5 +63,3 @@ abstract type Setter end
 function getpseudodir end
 
 function listpotentials end
-
-end
