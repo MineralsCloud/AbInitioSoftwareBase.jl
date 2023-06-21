@@ -146,7 +146,7 @@ const LONG_OPTIONS = (
 
 Generate a function from `kwargs` and `env`.
 """
-function mpiexec(env = Pair{String,String}[]; kwargs...)
+function mpiexec(env=Pair{String,String}[]; kwargs...)
     args = [get_path()]
     for (arg, val) in kwargs
         if arg in (:env, :genv, :envlist, :genvlist)
