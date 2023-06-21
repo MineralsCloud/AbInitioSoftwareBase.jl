@@ -1,42 +1,62 @@
 # Troubleshooting
 
-This page collects some possible errors you may encounter and trick how to fix them.
+```@contents
+Pages = ["troubleshooting.md"]
+Depth = 2
+```
 
-*If you have additional tips, please
-[submit a PR](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/compare) or
-[open an issue](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/issues/new/choose).*
+This page collects some possible errors you may encounter and trick how to fix them.
+If you have some questions about how to use this code, you are welcome to
+[discuss with us](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/discussions).
+
+If you have additional tips, please either
+[report an issue](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/issues/new) or
+[submit a PR](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/compare) with suggestions.
 
 ## Installation problems
 
-### Cannot find the Julia executable
+### Cannot find the `julia` executable
 
 Make sure you have Julia installed in your environment. Please download the latest
-[stable Julia](https://julialang.org/downloads/) for your platform.
-If you are using macOS, the recommended way is to use [Homebrew](https://brew.sh).
-If you do not want to install Homebrew or you are using other *nix that Julia supports,
-download the corresponding binaries. And then create a symbolic link `/usr/local/bin/julia`
-to the Julia executable. If `/usr/local/bin/` is not in your `$PATH`, modify your
-`.bashrc` or `.zshrc` and export it to your `$PATH`.
-Some clusters, like `Habanero`, `Comet` already have Julia installed as a module, you may
+[stable version](https://julialang.org/downloads/#current_stable_release) for your platform.
+If you are using a *nix system, the recommended way is to use
+[Juliaup](https://github.com/JuliaLang/juliaup). If you do not want to install Juliaup
+or you are using other platforms that Julia supports, download the corresponding binaries.
+Then, create a symbolic link to the Julia executable. If the path is not in your `$PATH`
+environment variable, export it to your `$PATH`.
+
+Some clusters, like
+[Habanero](https://confluence.columbia.edu/confluence/display/rcs/Habanero+HPC+Cluster+User+Documentation),
+[Comet](https://www.sdsc.edu/support/user_guides/comet.html),
+or [Expanse](https://www.sdsc.edu/services/hpc/expanse/index.html),
+already have Julia installed as a module, you may
 just `module load julia` to use it. If not, either install by yourself or contact your
 administrator.
 
-## Loading settings
+## Loading AbInitioSoftwareBase
 
-### Error parsing `YAML` files
+### Julia compiles/loads slow
 
-If you encounter
+First, we recommend you download the latest version of Julia. Usually, the newest version
+has the best performance.
 
-```
-ERROR: expected '<document start>' but found YAML.BlockMappingStartToken at nothing
-```
+If you just want Julia to do a simple task and only once, you could start the Julia REPL with
 
-or
-
-```
-ERROR: while scanning a simple key at line n, column 0: could not find expected ':' at line n+1, column 0
+```bash
+julia --compile=min
 ```
 
-Check whether you have no space between the `YAML` key and its value like
-`key:1` or `key:some text`, etc. To correct, change to `key: 1`, `key: some text`, etc.
-Otherwise check other `YAML` syntax you may have broken.
+to minimize compilation or
+
+```bash
+julia --optimize=0
+```
+
+to minimize optimizations, or just use both. Or you could make a system image
+and run with
+
+```bash
+julia --sysimage custom-image.so
+```
+
+See [Fredrik Ekre's talk](https://youtu.be/IuwxE3m0_QQ?t=313) for details.
