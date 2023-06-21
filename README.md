@@ -1,56 +1,66 @@
 # AbInitioSoftwareBase
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://MineralsCloud.github.io/AbInitioSoftwareBase.jl/stable)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://MineralsCloud.github.io/AbInitioSoftwareBase.jl/dev)
-[![Build Status](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/workflows/CI/badge.svg)](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/actions)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/MineralsCloud/AbInitioSoftwareBase.jl?svg=true)](https://ci.appveyor.com/project/singularitti/AbInitioSoftwareBase-jl)
-[![Build Status](https://api.cirrus-ci.com/github/MineralsCloud/AbInitioSoftwareBase.jl.svg)](https://cirrus-ci.com/github/MineralsCloud/AbInitioSoftwareBase.jl)
-[![pipeline status](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/badges/master/pipeline.svg)](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/-/pipelines)
-[![coverage report](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/badges/master/coverage.svg)](https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/-/jobs)
-[![Coverage](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl)
+|                                 **Documentation**                                  |                                                                                                 **Build Status**                                                                                                 |                                        **Others**                                         |
+| :--------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: |
+| [![Stable][docs-stable-img]][docs-stable-url] [![Dev][docs-dev-img]][docs-dev-url] | [![Build Status][gha-img]][gha-url] [![Build Status][appveyor-img]][appveyor-url] [![Build Status][cirrus-img]][cirrus-url] [![pipeline status][gitlab-img]][gitlab-url] [![Coverage][codecov-img]][codecov-url] | [![GitHub license][license-img]][license-url] [![Code Style: Blue][style-img]][style-url] |
 
-`AbInitioSoftwareBase.jl` is an interface package that defines some common API
-shared by some packages that represent different *ab initio* software like
-[Quantum ESPRESSO](https://www.quantum-espresso.org/), [VASP](https://www.vasp.at/), etc.
-The API will be extended in
-[`QuantumESPRESSOBase.jl`](https://github.com/MineralsCloud/QuantumESPRESSOBase.jl), etc.
+[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
+[docs-stable-url]: https://MineralsCloud.github.io/AbInitioSoftwareBase.jl/stable
+[docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
+[docs-dev-url]: https://MineralsCloud.github.io/AbInitioSoftwareBase.jl/dev
+[gha-img]: https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/workflows/CI/badge.svg
+[gha-url]: https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/actions
+[appveyor-img]: https://ci.appveyor.com/api/projects/status/github/MineralsCloud/AbInitioSoftwareBase.jl?svg=true
+[appveyor-url]: https://ci.appveyor.com/project/singularitti/AbInitioSoftwareBase-jl
+[cirrus-img]: https://api.cirrus-ci.com/github/MineralsCloud/AbInitioSoftwareBase.jl.svg
+[cirrus-url]: https://cirrus-ci.com/github/MineralsCloud/AbInitioSoftwareBase.jl
+[gitlab-img]: https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/badges/main/pipeline.svg
+[gitlab-url]: https://gitlab.com/singularitti/AbInitioSoftwareBase.jl/-/pipelines
+[codecov-img]: https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/MineralsCloud/AbInitioSoftwareBase.jl
+[license-img]: https://img.shields.io/github/license/MineralsCloud/AbInitioSoftwareBase.jl
+[license-url]: https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/blob/main/LICENSE
+[style-img]: https://img.shields.io/badge/code%20style-blue-4495d1.svg
+[style-url]: https://github.com/invenia/BlueStyle
 
 The code is [hosted on GitHub](https://github.com/MineralsCloud/AbInitioSoftwareBase.jl),
 with some continuous integration services to test its validity.
 
-## Compatibility
-
-- [Julia version: `v1.0.0` to `v1.7.3`](https://julialang.org/downloads/)
-- Dependencies:
-  - [`Compat.jl`](https://github.com/JuliaLang/Compat.jl) `v3.16.0` and above
-  - [`Configurations.jl`](https://github.com/Roger-luo/Configurations.jl) `v0.3.0` and above
-  - [`IsURL.jl`](https://github.com/zlatanvasovic/IsURL.jl) `v0.2.0` and above
-  - [`JSON.jl`](https://github.com/JuliaIO/JSON.jl) `v0.20.0` and above
-  - [`TOML.jl`](https://github.com/JuliaLang/TOML.jl) `v1.0` and above
-  - [`YAML.jl`](https://github.com/JuliaData/YAML.jl) `v0.3.0` and above
-  - [`Preferences.jl`](https://github.com/JuliaPackaging/Preferences.jl) `v1.0.0` and above
-- OS: macOS, Linux, Windows, and FreeBSD
-- Architecture: x86, x64, ARM
+This repository is created and maintained by [@singularitti](https://github.com/singularitti).
+You are very welcome to contribute.
 
 ## Installation
 
-To install `AbInitioSoftwareBase`, please open Julia's interactive session (known as REPL) and
-press `]` key in the REPL to use the [package mode](https://docs.julialang.org/en/v1/stdlib/Pkg/),
-then type the following command
+The package can be installed with the Julia package manager.
+From the Julia REPL, type `]` to enter the Pkg REPL mode and run:
 
-For stable release
-
-```julia
-(@v1.6) pkg> add AbInitioSoftwareBase
+```
+pkg> add AbInitioSoftwareBase
 ```
 
-For current master
+Or, equivalently, via the [`Pkg` API](https://pkgdocs.julialang.org/v1/getting-started/):
 
 ```julia
-(@v1.6) pkg> add AbInitioSoftwareBase#master
+julia> import Pkg; Pkg.add("AbInitioSoftwareBase")
 ```
 
-## Contributors
+## Documentation
 
-This repository is created and maintained by [singularitti](https://github.com/singularitti).
-You are very welcome to contribute.
+- [**STABLE**][docs-stable-url] — **documentation of the most recently tagged version.**
+- [**DEV**][docs-dev-url] — _documentation of the in-development version._
+
+## Project status
+
+The package is tested against, and being developed for, Julia `1.6` and above on Linux,
+macOS, and Windows.
+
+## Questions and contributions
+
+You are welcome to post usage questions on [our discussion page][discussions-url].
+
+Contributions are very welcome, as are feature requests and suggestions. Please open an
+[issue][issues-url] if you encounter any problems. The [Contributing](@ref) page has
+guidelines that should be followed when opening pull requests and contributing code.
+
+[discussions-url]: https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/discussions
+[issues-url]: https://github.com/MineralsCloud/AbInitioSoftwareBase.jl/issues
