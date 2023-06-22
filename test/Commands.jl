@@ -1,6 +1,46 @@
-using AbInitioSoftwareBase.Commands
+using AbInitioSoftwareBase.Commands: Mpiexec
 
-@testset "Test `Mpiexec`" begin
+@testset "Test `Mpiexec` with short options" begin
+    mpi = Mpiexec(
+        "/usr/local/bin/mpiexec",
+        "TMPDIR" => "/tmp",
+        "PATH" => "/usr/local/bin";
+        v=true,
+        n=2,
+    )
+    cmd = mpi("myprogram")
+    @test cmd.exec == ["/usr/local/bin/mpiexec", "-v", "-n", "2", "myprogram"]
+    @test cmd.env == ["TMPDIR=/tmp", "PATH=/usr/local/bin"]
+end
+
+@testset "Test `Mpiexec` with long options" begin
+    mpi = Mpiexec(
+        "/usr/local/bin/mpiexec",
+        "TMPDIR" => "/tmp",
+        "PATH" => "/usr/local/bin";
+        verbose=true,
+        npersocket=2,
+    )
+    cmd = mpi("myprogram")
+    @test cmd.exec ==
+        ["/usr/local/bin/mpiexec", "--verbose", "--npersocket", "2", "myprogram"]
+    @test cmd.env == ["TMPDIR=/tmp", "PATH=/usr/local/bin"]
+end
+
+@testset "Test `Mpiexec` with mixed options" begin
+    mpi = Mpiexec(
+        "/usr/local/bin/mpiexec",
+        "TMPDIR" => "/tmp",
+        "PATH" => "/usr/local/bin";
+        v=true,
+        npersocket=2,
+    )
+    cmd = mpi("myprogram")
+    @test cmd.exec == ["/usr/local/bin/mpiexec", "-v", "--npersocket", "2", "myprogram"]
+    @test cmd.env == ["TMPDIR=/tmp", "PATH=/usr/local/bin"]
+end
+
+@testset "Test `Mpiexec` with `pw.x`" begin
     mpiexec = Mpiexec(
         "mpiexec",
         "TMPDIR" => "./",
