@@ -1,4 +1,4 @@
-using AbInitioSoftwareBase.Inputs: FormatConfig
+using AbInitioSoftwareBase: FormatConfig
 
 @testset "Test `FormatConfig` is mutable" begin
     config = FormatConfig(;
