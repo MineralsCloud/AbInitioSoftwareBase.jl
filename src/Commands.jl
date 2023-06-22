@@ -145,6 +145,11 @@ Create a `Mpiexec` functor.
 """
 Mpiexec(path, env...; options...) = Mpiexec(path, env, options)
 
+"""
+    (mpiexec::Mpiexec)(exec...)
+
+Create a `Cmd` object from an `Mpiexec` functor and a set of arguments.
+"""
 function (mpiexec::Mpiexec)(exec...)
     args = [mpiexec.path]
     for (arg, val) in mpiexec.options
