@@ -141,8 +141,8 @@ const LONG_OPTIONS = (
 
 Generate a function from `kwargs` and `env`.
 """
-function mpiexec(env=Pair{String,String}[]; kwargs...)
-    args = [get_path()]
+function mpiexec(path=get_path(), env=Pair{String,String}[]; kwargs...)
+    args = [path]
     for (arg, val) in kwargs
         if arg in (:env, :genv, :envlist, :genvlist)
             throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
