@@ -28,5 +28,5 @@ CurrentModule = AbInitioSoftwareBase.Commands
 ```
 
 ```@docs
-mpiexec
+Mpiexec
 ```
