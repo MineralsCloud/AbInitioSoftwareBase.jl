@@ -140,24 +140,17 @@ struct Mpiexec
 end
 Mpiexec(path, env...; options...) = Mpiexec(path, env, options)
 
-"""
-    (mpiexec::Mpiexec)(env = Pair{String,String}[]; kwargs...)
-
-Generate a function from `kwargs` and `env`.
-"""
-function (mpiexec::Mpiexec)(env=Pair{String,String}[]; kwargs...)
+function (mpiexec::Mpiexec)(exec...)
     args = [mpiexec.path]
-    for (arg, val) in kwargs
+    for (arg, val) in mpiexec.options
         if arg in (:env, :genv, :envlist, :genvlist)
             throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
         end
         _pusharg!(args, string(arg), val)
     end
-    return function (exec)
-        append!(args, exec)
-        cmd = Cmd(args)
-        return addenv(cmd, env...)
-    end
+    push!(args, exec...)
+    cmd = Cmd(args)
+    return addenv(cmd, mpiexec.env...)
 end
 
 function _pusharg!(args, arg, val)
