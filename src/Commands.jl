@@ -3,7 +3,7 @@ module Commands
 using Compat: addenv
 using Preferences: @load_preference, @set_preferences!
 
-export mpiexec
+export Mpiexec, mpiexec
 
 get_path() = @load_preference("mpiexec path", "mpiexec")
 
@@ -132,6 +132,10 @@ const LONG_OPTIONS = (
     "soft",
     "configfile",
 )
+
+struct Mpiexec
+    path::String
+end
 
 """
     mpiexec(env = Pair{String,String}[]; kwargs...)
