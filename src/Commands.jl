@@ -138,6 +138,11 @@ struct Mpiexec
     env::Tuple
     options::Iterators.Pairs
 end
+"""
+    Mpiexec(path, env...; options...)
+
+Create a `Mpiexec` functor.
+"""
 Mpiexec(path, env...; options...) = Mpiexec(path, env, options)
 
 function (mpiexec::Mpiexec)(exec...)
