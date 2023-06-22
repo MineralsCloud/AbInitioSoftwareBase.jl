@@ -143,7 +143,8 @@ end
 
 Create a `Mpiexec` functor.
 """
-Mpiexec(path, env...; options...) = Mpiexec(path, env, options)
+Mpiexec(path, env::Pair...; options...) =
+    Mpiexec(path, Tuple(string(key) => string(value) for (key, value) in env), options)
 
 """
     (mpiexec::Mpiexec)(exec...)
