@@ -160,7 +160,7 @@ function (mpiexec::Mpiexec)(exec...)
     end
     push!(args, exec...)
     cmd = Cmd(args)
-    return setenv(cmd, mpiexec.env...)
+    return setenv(cmd, mpiexec.env)
 end
 
 function _pusharg!(args, arg, val)
