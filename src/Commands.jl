@@ -1,20 +1,15 @@
 module Commands
 
 using Compat: addenv
-@static if VERSION >= v"1.6"
-    using Preferences: @load_preference, @set_preferences!
-end
+using Preferences: @load_preference, @set_preferences!
 
 export mpiexec
 
-@static if VERSION >= v"1.6"
-    get_path() = @load_preference("mpiexec path", "mpiexec")
-    function set_path(path::String)
-        @assert ispath(path)
-        @set_preferences!("mpiexec path" => path)
-    end
-else
-    get_path() = "mpiexec"
+get_path() = @load_preference("mpiexec path", "mpiexec")
+
+function set_path(path::String)
+    @assert ispath(path)
+    @set_preferences!("mpiexec path" => path)
 end
 
 "Represent the configurations of a command."
