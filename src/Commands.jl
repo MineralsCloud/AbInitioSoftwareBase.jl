@@ -12,9 +12,6 @@ function set_path(path::String)
     @set_preferences!("mpiexec path" => path)
 end
 
-"Represent the configurations of a command."
-abstract type CommandConfig end
-
 # See https://www.open-mpi.org/doc/v3.0/man1/mpiexec.1.php & https://www.mpich.org/static/docs/v3.1/www1/mpiexec.html
 const SHORT_OPTIONS = (
     # Open MPI options
