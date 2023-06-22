@@ -135,7 +135,10 @@ const LONG_OPTIONS = (
 
 struct Mpiexec
     path::String
+    env::Tuple
+    options::Iterators.Pairs
 end
+Mpiexec(path, env...; options...) = Mpiexec(path, env, options)
 
 """
     (mpiexec::Mpiexec)(env = Pair{String,String}[]; kwargs...)
