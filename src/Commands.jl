@@ -3,7 +3,7 @@ module Commands
 using Compat: addenv
 using Preferences: @load_preference, @set_preferences!
 
-export Mpiexec, mpiexec
+export Mpiexec
 
 get_path() = @load_preference("mpiexec path", "mpiexec")
 
@@ -138,12 +138,12 @@ struct Mpiexec
 end
 
 """
-    mpiexec(env = Pair{String,String}[]; kwargs...)
+    (mpiexec::Mpiexec)(env = Pair{String,String}[]; kwargs...)
 
 Generate a function from `kwargs` and `env`.
 """
-function mpiexec(path=get_path(), env=Pair{String,String}[]; kwargs...)
-    args = [path]
+function (mpiexec::Mpiexec)(env=Pair{String,String}[]; kwargs...)
+    args = [mpiexec.path]
     for (arg, val) in kwargs
         if arg in (:env, :genv, :envlist, :genvlist)
             throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
