@@ -5,9 +5,9 @@ using Preferences: @load_preference, @set_preferences!
 
 export Mpiexec
 
-get_path() = @load_preference("mpiexec path", "mpiexec")
+getpath() = @load_preference("mpiexec path", "mpiexec")
 
-function set_path(path::String)
+function setpath(path::String)
     @assert ispath(path)
     @set_preferences!("mpiexec path" => path)
 end
