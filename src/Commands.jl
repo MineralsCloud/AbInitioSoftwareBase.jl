@@ -154,6 +154,13 @@ Mpiexec(path, env::Pair...; options...) =
 Create a `Cmd` object from an `Mpiexec` functor and a set of arguments.
 """
 function (mpiexec::Mpiexec)(exec...)
+    args = _expandargs(mpiexec)
+    push!(args, exec...)
+    cmd = Cmd(args)
+    return setenv(cmd, mpiexec.env)
+end
+
+function _expandargs(mpiexec::Mpiexec)
     args = [mpiexec.path]
     for (arg, val) in mpiexec.options
         if arg in (:env, :genv, :envlist, :genvlist)
@@ -161,9 +168,7 @@ function (mpiexec::Mpiexec)(exec...)
         end
         _pusharg!(args, string(arg), val)
     end
-    push!(args, exec...)
-    cmd = Cmd(args)
-    return setenv(cmd, mpiexec.env)
+    return args
 end
 
 function _pusharg!(args, arg, val)
