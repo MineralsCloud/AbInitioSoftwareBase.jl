@@ -38,34 +38,4 @@ function (mpiexec::Mpiexec)(exec...)
     return setenv(cmd, mpiexec.env)
 end
 
-function _expandargs(mpiexec::Mpiexec)
-    args = [mpiexec.path]
-    for (arg, val) in mpiexec.options
-        if arg in (:env, :genv, :envlist, :genvlist)
-            throw(ArgumentError("Please treat `$arg` as a positional argument `env`."))
-        end
-        _pusharg!(args, string(arg), val)
-    end
-    return args
-end
-
-function _pusharg!(args, arg, val)
-    arg = replace(arg, '_' => '-')
-    option = (arg in LONG_OPTIONS ? "--" : '-') * arg
-    if val isa AbstractVector{<:AbstractString}
-        join(val, ',')
-        return push!(args, option, val)
-    elseif val isa Bool  # flag
-        return push!(args, option)
-    elseif val isa Pair
-        return push!(args, option, string(val.first), string(val.second))
-    elseif val isa AbstractVector{<:Pair} || val isa AbstractDict
-        for v in val
-            push!(args, option, string(v.first), string(v.second))
-        end
-    else
-        return push!(args, option, string(val))
-    end
-end
-
 end
