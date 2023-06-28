@@ -1,6 +1,5 @@
 module Commands
 
-using Compat: addenv
 using Preferences: @load_preference, @set_preferences!, @delete_preferences!
 
 export Mpiexec
