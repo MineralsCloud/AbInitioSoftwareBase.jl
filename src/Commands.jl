@@ -1,6 +1,9 @@
 module Commands
 
+using CommandComposer: Option
 using Preferences: @load_preference, @set_preferences!, @delete_preferences!
+
+import CommandComposer: Command
 
 export Mpiexec
 
@@ -31,11 +34,11 @@ Mpiexec(path, env::Pair...; options...) =
 
 Create a `Cmd` object from an `Mpiexec` functor and a set of arguments.
 """
-function (mpiexec::Mpiexec)(exec...)
-    args = _expandargs(mpiexec)
-    push!(args, exec...)
-    cmd = Cmd(args)
-    return setenv(cmd, mpiexec.env)
+function Command(mpiexec::Mpiexec)
+    options = map(pairs(mpiexec.options)) do (key, value)
+        Option("", string(key), value)
+    end
+    return Command(mpiexec.path, [], options, [], [])
 end
 
 end
