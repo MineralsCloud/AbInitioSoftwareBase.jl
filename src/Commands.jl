@@ -42,7 +42,7 @@ Mpiexec(path, env::Pair...; options...) =
 Create a `Cmd` object from an `Mpiexec` functor and a set of arguments.
 """
 function Command(mpiexec::Mpiexec)
-    options = map(pairs(mpiexec.options)) do (key, value)
+    options = map(keys(mpiexec.options), values(mpiexec.options)) do key, value
         length(key) <= 2 ? ShortOption(key, value) : LongOption(string(key), value)
     end
     return Command(mpiexec.path, options, [], [])
