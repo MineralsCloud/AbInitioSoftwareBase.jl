@@ -1,9 +1,9 @@
 module Commands
 
-using CommandComposer: ShortOption, LongOption
+using ComposableCommands: ShortOption, LongOption
 using Preferences: @load_preference, @set_preferences!, @delete_preferences!
 
-import CommandComposer: Command
+import ComposableCommands: Command
 
 export Mpiexec
 
