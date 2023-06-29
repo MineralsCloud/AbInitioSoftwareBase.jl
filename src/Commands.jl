@@ -18,7 +18,7 @@ unsetpath() = @delete_preferences!("mpiexec path")
 
 abstract type Executable end
 # See https://github.com/JuliaLang/julia/blob/3fa2d26/base/operators.jl#L1078-L1083 & https://github.com/JuliaGeometry/CoordinateTransformations.jl/blob/ff9ea6e/src/core.jl#L29-L32
-struct ExecutableChain{A<:Executable,B<:Executable}
+struct ExecutableChain{A<:Executable,B<:Executable} <: Executable
     a::A
     b::B
 end
