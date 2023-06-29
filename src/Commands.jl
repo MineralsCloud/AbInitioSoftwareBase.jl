@@ -16,7 +16,14 @@ end
 
 unsetpath() = @delete_preferences!("mpiexec path")
 
-struct Mpiexec
+abstract type Executable end
+# See https://github.com/JuliaLang/julia/blob/3fa2d26/base/operators.jl#L1078-L1083 & https://github.com/JuliaGeometry/CoordinateTransformations.jl/blob/ff9ea6e/src/core.jl#L29-L32
+struct ExecutableChain{A<:Executable,B<:Executable}
+    a::A
+    b::B
+end
+
+struct Mpiexec <: Executable
     path::String
     env::Tuple
     options::Iterators.Pairs
@@ -40,5 +47,11 @@ function Command(mpiexec::Mpiexec)
     end
     return Command(mpiexec.path, options, [], [])
 end
+
+# See https://github.com/JuliaLang/julia/blob/3fa2d26/base/operators.jl#L1088
+Base.:∘(a::Executable, b::Executable) = ExecutableChain(a, b)
+
+# See https://github.com/JuliaGeometry/CoordinateTransformations.jl/blob/ff9ea6e/src/core.jl#L34
+Base.show(io::IO, chain::ExecutableChain) = print(io, '(', chain.a, " ∘ ", chain.b, ')')
 
 end
