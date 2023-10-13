@@ -1,7 +1,7 @@
 name = "AbInitioSoftwareBase"
 uuid = "df5135bc-470e-46c6-b451-292e27ca5b84"
 authors = ["Qi Zhang <singularitti@outlook.com>"]
-version = "0.10.0"
+version = "0.10.1"
 
 [deps]
 ComposableCommands = "b5b47461-4a42-4db3-bdf2-684fadd57bc3"
