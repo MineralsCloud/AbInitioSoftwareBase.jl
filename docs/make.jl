@@ -1,7 +1,9 @@
 using AbInitioSoftwareBase
 using Documenter
 
-DocMeta.setdocmeta!(AbInitioSoftwareBase, :DocTestSetup, :(using AbInitioSoftwareBase); recursive=true)
+DocMeta.setdocmeta!(
+    AbInitioSoftwareBase, :DocTestSetup, :(using AbInitioSoftwareBase); recursive=true
+)
 
 makedocs(;
     modules=[AbInitioSoftwareBase],
@@ -16,9 +18,7 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
-        "Manual" => [
-            "Installation guide" => "installation.md",
-        ],
+        "Manual" => ["Installation guide" => "installation.md"],
         "API Reference" => "api.md",
         "Developer Docs" => [
             "Contributing" => "developers/contributing.md",
@@ -29,7 +29,4 @@ makedocs(;
     ],
 )
 
-deploydocs(;
-    repo="github.com/MineralsCloud/AbInitioSoftwareBase.jl",
-    devbranch="main",
-)
+deploydocs(; repo="github.com/MineralsCloud/AbInitioSoftwareBase.jl", devbranch="main")
